@@ -5,15 +5,15 @@
  * Gère la connexion PDO à MySQL
  * Affiche les messages de debug
  */
-
+require_once __DIR__ . '/../../config.php';
 class Database
 {
-    private $host = '127.0.0.1';
-    private $dbname = 'cabinet_dentaire';
-    private $username = 'root';
-    private $password = '';
-    private $charset = 'utf8mb4';
-    private $port = 3306;
+    private $host = DB_HOST;
+    private $dbname = DB_NAME;
+    private $username = DB_USER;
+    private $password = DB_PASSWORD;
+    private $charset = DB_CHARSET;
+    private $port = DB_PORT;
     
     private $pdo = null;
     public $debug_messages = [];
@@ -28,10 +28,20 @@ class Database
         if (!defined('APP_PATH')) {
             define('APP_PATH', dirname(__DIR__));
         }
+        if (!defined('ROOT_PATH')) {
+            define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+        }
 
-        $configFile = APP_PATH . '/config/config.php';
+        // Charger config.php depuis la racine
+        $configFile = ROOT_PATH . '/config.php';
         if (file_exists($configFile)) {
             require_once $configFile;
+        } else {
+            // Fallback vers l'ancien chemin
+            $configFile = APP_PATH . '/config/config.php';
+            if (file_exists($configFile)) {
+                require_once $configFile;
+            }
         }
 
         $this->host = defined('DB_HOST') ? DB_HOST : $this->host;

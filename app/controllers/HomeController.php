@@ -13,7 +13,17 @@ class HomeController extends Controller
      */
     public function index()
     {
-        // Afficher la vue home/index
-        $this->view('home.index', []);
+        // Charger le fichier index.php depuis la racine
+        if (!defined('ROOT_PATH')) {
+            define('ROOT_PATH', dirname(dirname(dirname(__FILE__))));
+        }
+        
+        $viewPath = ROOT_PATH . '/index.php';
+        if (file_exists($viewPath)) {
+            include $viewPath;
+        } else {
+            // Fallback vers la vue app/views/home/index
+            $this->view('home.index', []);
+        }
     }
 }
