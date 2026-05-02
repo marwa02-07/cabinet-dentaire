@@ -10,6 +10,7 @@ return [
     'GET' => [
         '/' => ['HomeController', 'index'],
         '/login' => ['AuthController', 'login'],
+        '/login/medecin' => ['AuthController', 'loginMedecin'],
         '/register' => ['AuthController', 'register'],
         '/register-medecin' => ['AuthController', 'registerMedecin'],
         '/register-secretaire' => ['AuthController', 'registerSecretaire'],

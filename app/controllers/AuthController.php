@@ -46,7 +46,43 @@ class AuthController extends Controller
         
         // Afficher la vue login
         $this->view('auth.login', [
-            'error' => $error,
+            'error'   => $error,
+            'success' => $success
+        ]);
+    }
+
+    /**
+     * Affiche la page de login dédiée au Médecin
+     */
+    public function loginMedecin()
+    {
+        if (session_status() === PHP_SESSION_NONE) {
+            session_start();
+        }
+
+        // Si déjà connecté en tant que médecin, rediriger directement
+        if (isset($_SESSION['user_id']) && in_array($_SESSION['user_role'] ?? '', ['medecin', 'dentiste'])) {
+            header('Location: index.php?route=/medecin/dashboard');
+            exit();
+        }
+
+        $error   = '';
+        $success = '';
+
+        if (isset($_SESSION['login_error'])) {
+            $error = $_SESSION['login_error'];
+            unset($_SESSION['login_error']);
+        }
+        if (isset($_SESSION['login_success'])) {
+            $success = $_SESSION['login_success'];
+            unset($_SESSION['login_success']);
+        }
+        if (isset($_SESSION['debug_messages'])) {
+            unset($_SESSION['debug_messages']);
+        }
+
+        $this->view('auth.login-medecin', [
+            'error'   => $error,
             'success' => $success
         ]);
     }

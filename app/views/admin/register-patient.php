@@ -6,348 +6,489 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Patient - Cabinet Dentaire</title>
+    <title>Créer un compte patient — Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        :root{
-    --primary-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+        :root {
+            --primary: #0284c7;
+            --primary-dark: #0369a1;
+            --accent: #34d399;
+            --accent-soft: #6ee7b7;
+            --bg: #f0f9ff;
+            --surface: #ffffff;
+            --text: #0c1e2e;
+            --muted: #5b6f82;
+            --line: #c5e8f0;
+            --ok: #16a34a;
+            --err: #dc2626;
+            --radius-xl: 22px;
+            --radius-lg: 14px;
+            --radius-md: 10px;
+            --radius-pill: 999px;
+            --shadow-lg: 0 24px 60px rgba(2, 132, 199, 0.18);
         }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-        .navbar-custom{
-            background: linear-gradient(135deg, rgba(14,165,233,0.95) 0%, rgba(99,102,241,0.92) 55%, rgba(34,197,94,0.85) 120%);
-            box-shadow: 0 10px 30px rgba(15, 23, 42, 0.18);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-        .navbar-custom .navbar-brand{
-            color: white !important;
-            font-weight: 800;
-            letter-spacing: .2px;
-            font-size: 18px;
-        }
-        .navbar-custom .nav-link{
-            color: rgba(255, 255, 255, 0.92) !important;
-            font-weight: 600;
-            margin-left: 10px;
-            border-radius: 999px;
-            padding: 8px 12px;
-        }
-        .navbar-custom .nav-link:hover{ background: rgba(255,255,255,0.16); color:#fff !important; }
-        .navbar-custom .nav-link.active{ background: rgba(255,255,255,0.20); color:#fff !important; }
-        .user-info{
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 13px;
-            margin-right: 12px;
-            display:flex;
-            align-items:center;
-            gap:10px;
-            white-space: nowrap;
-        }
-        .role-badge{
-            background-color: rgba(255, 255, 255, 0.18);
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 6px 12px;
-            border-radius: 999px;
-            font-size: 12px;
-            font-weight: 800;
-            letter-spacing: .5px;
-        }
-
-        body{
-            background:
-                radial-gradient(1100px 520px at 15% -5%, rgba(99,102,241,0.14), transparent 62%),
-                radial-gradient(980px 520px at 85% 0%, rgba(14,165,233,0.16), transparent 58%),
-                linear-gradient(180deg, var(--bg1) 0%, var(--bg0) 52%, #ffffff 100%);
+        body {
+            font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
             min-height: 100vh;
-            padding: 20px;
-            padding-top: 96px;
-            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 16px;
+            background:
+                radial-gradient(1180px 500px at -12% -4%, rgba(2, 132, 199, 0.16), transparent 62%),
+                radial-gradient(1000px 440px at 106% 0%, rgba(52, 211, 153, 0.14), transparent 56%),
+                var(--bg);
+            background-attachment: fixed;
         }
 
-        .auth-wrap{
-            min-height: calc(100vh - 96px);
-            display:flex;
-            align-items:center;
-            justify-content:center;
+        .particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+        .particle { position: absolute; border-radius: 50%; opacity: .07; animation: float linear infinite; }
+        .particle:nth-child(1) { width: 290px; height: 290px; background: var(--primary); top: -62px; left: -42px; animation-duration: 18s; }
+        .particle:nth-child(2) { width: 170px; height: 170px; background: var(--accent); top: 56%; right: -28px; animation-duration: 22s; animation-delay: -7s; }
+        .particle:nth-child(3) { width: 118px; height: 118px; background: var(--primary-dark); bottom: 5%; left: 12%; animation-duration: 15s; animation-delay: -3s; }
+        @keyframes float {
+            0%, 100% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-26px) scale(1.04); }
         }
 
-        .register-card{
-    max-width: 520px; /* ↓ plus petit */
-    width: 100%;
-    border: none;
-    border-radius: 14px;
-    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
-}
-.card-header-custom{
-    background: var(--primary-gradient);
-    border-radius: 14px 14px 0 0 !important;
-    padding: 18px 20px; /* ↓ réduit */
-    text-align: center;
-}
-        .card-header-custom h4{ color:white; font-weight:600; margin:0; }
-        .card-header-custom p{ color: rgba(255,255,255,0.85); font-size:14px; margin:5px 0 0 0; }
-        .card-body-custom{
-    padding: 20px; /* ↓ réduit */
-
-}
-.input-group-text {
-            background: #f8f9fa;
-            border-radius: 8px 0 0 8px;
-            border: 1px solid #ced4da;
-            border-right: none;
-            color:rgb(116, 38, 181);
-        }
-        .input-group .form-control {
-            border-radius: 0 8px 8px 0;
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+            max-width: 960px;
+            display: grid;
+            grid-template-columns: 292px 1fr;
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
         }
 
-        .form-label{ font-weight:600; font-size:13px; color:#495057; margin-bottom:5px; }
-        .form-control{
-            border-radius: 8px;
-            padding: 10px 12px;
-            border: 1px solid #ced4da;
-            font-size: 14px;
-            transition: all 0.3s;
+        .panel-left {
+            background: linear-gradient(145deg, #0369a1 0%, #0ea5e9 46%, #2dd4a4 100%);
+            padding: 30px 26px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
         }
-        .form-control:focus{
-            border-color: #f59e0b;
-            box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+        .panel-left::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(580px 360px at -8% 108%, rgba(255, 255, 255, 0.18), transparent 58%);
+            pointer-events: none;
         }
-        .form-control::placeholder{ color:#adb5bd; }
+        .panel-left > * { position: relative; z-index: 1; }
 
-        .btn-submit{
-    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-    border: none;
-    border-radius: 8px;
-    padding: 12px;
-    font-weight: 600;
-    font-size: 15px;
-    transition: all 0.3s;
-}
+        .brand-mark { display: flex; align-items: center; gap: 11px; }
+        .brand-icon {
+            width: 46px;
+            height: 46px;
+            flex-shrink: 0;
+            background: rgba(255, 255, 255, 0.17);
+            border: 1.5px solid rgba(255, 255, 255, 0.3);
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 19px;
+            backdrop-filter: blur(8px);
+        }
+        .brand-text { font-weight: 800; font-size: 15px; line-height: 1.2; }
+        .brand-text small { font-weight: 500; font-size: 11px; opacity: .78; display: block; }
 
-.btn-submit:hover{
-    background: linear-gradient(135deg, #4f46e5 0%, #9333ea 100%);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(99, 102, 241, 0.35);
-    color: white;
-}
-        .btn-cancel{
-            border-radius: 8px;
-            padding: 12px;
-            font-weight: 600;
+        .illus-center { text-align: center; }
+        .illus-icon {
+            font-size: 56px;
+            display: block;
+            margin-bottom: 8px;
+            filter: drop-shadow(0 8px 22px rgba(0, 0, 0, 0.22));
+            animation: pulse-icon 3.2s ease-in-out infinite;
         }
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #6c757d;
+        @keyframes pulse-icon {
+            0%, 100% { transform: scale(1) translateY(0); }
+            50% { transform: scale(1.05) translateY(-5px); }
         }
-        .login-link a {
-            color: #1976d2;
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-        .alert{ border-radius: 8px; font-size: 14px; }
-
-        @media (max-width: 768px){
-            .card-body-custom{ padding: 22px; }
-        }
-        .user-info{
-            color: rgba(255, 255, 255, 0.92);
-            font-size: 13px;
-            margin-right: 12px;
-            display:flex;
-            align-items:center;
-            gap:10px;
-            white-space: nowrap;
-        }
-
-        .role-badge{
-            background-color: rgba(255, 255, 255, 0.18);
-            border: 1px solid rgba(255,255,255,0.25);
-            padding: 6px 12px;
-            border-radius: 999px;
+        .illus-title { font-size: 19px; font-weight: 900; letter-spacing: -0.2px; margin-bottom: 6px; }
+        .illus-sub {
             font-size: 12px;
-            font-weight: 800;
+            opacity: .84;
+            line-height: 1.55;
+            max-width: 232px;
+            margin: 0 auto;
+        }
+
+        .chips { display: flex; flex-direction: column; gap: 6px; }
+        .chip {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.13);
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: var(--radius-pill);
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            backdrop-filter: blur(6px);
+        }
+        .chip i { font-size: 11px; color: var(--accent-soft); width: 14px; text-align: center; }
+
+        .panel-right {
+            background: var(--surface);
+            padding: 26px 34px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            overflow-y: auto;
+            max-height: min(96vh, 900px);
+        }
+
+        .admin-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-shrink: 0;
+            margin-bottom: 14px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--line);
+        }
+        .admin-topbar .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--muted);
+            text-decoration: none;
+            transition: color .2s;
+        }
+        .admin-topbar .back-link:hover { color: var(--primary); }
+        .admin-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(2, 132, 199, 0.1), rgba(52, 211, 153, 0.1));
+            color: var(--primary-dark);
+            border: 1px solid rgba(2, 132, 199, 0.2);
+            border-radius: var(--radius-pill);
+            padding: 4px 11px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
             letter-spacing: .5px;
+        }
+
+        .form-hd { margin-bottom: 12px; flex-shrink: 0; }
+        .form-hd h1 {
+            font-size: 19px;
+            font-weight: 900;
+            color: var(--text);
+            letter-spacing: -0.3px;
+            margin-bottom: 2px;
+            line-height: 1.25;
+        }
+        .form-hd p { font-size: 12px; color: var(--muted); font-weight: 500; }
+
+        .al {
+            display: flex;
+            align-items: flex-start;
+            gap: 9px;
+            padding: 10px 14px;
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-weight: 500;
+            margin-bottom: 14px;
+            animation: slideDown .3s ease;
+        }
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .al-err { background: rgba(220, 38, 38, 0.08); color: var(--err); border: 1px solid rgba(220, 38, 38, 0.2); }
+        .al-ok { background: rgba(22, 163, 74, 0.08); color: var(--ok); border: 1px solid rgba(22, 163, 74, 0.2); }
+        .al i { margin-top: 1px; flex-shrink: 0; }
+
+        .section-label {
+            font-size: 10px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: .8px;
+            color: var(--muted);
+            margin: 12px 0 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .section-label::after { content: ''; flex: 1; height: 1px; background: var(--line); }
+        .section-label:first-child { margin-top: 0; }
+
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+        .col-full { grid-column: 1 / -1; }
+
+        .field { display: flex; flex-direction: column; gap: 3px; }
+        .field label { font-size: 11.5px; font-weight: 700; color: var(--text); }
+        .field label .req { color: var(--err); margin-left: 2px; }
+
+        .field-wrap { position: relative; }
+        .field-wrap .fi {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 13px;
+            pointer-events: none;
+            transition: color .2s;
+        }
+        .field-wrap:focus-within .fi { color: var(--primary); }
+        .field-wrap.textarea-wrap .fi {
+            top: 12px;
+            transform: none;
+        }
+
+        .fc {
+            width: 100%;
+            padding: 8px 12px 8px 34px;
+            border: 1.5px solid var(--line);
+            border-radius: var(--radius-md);
+            font-size: 13px;
+            font-family: inherit;
+            color: var(--text);
+            background: var(--surface);
+            outline: none;
+            transition: border-color .2s, box-shadow .2s;
+            appearance: none;
+        }
+        .fc::placeholder { color: #98b4c8; }
+        .fc:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(2, 132, 199, 0.1);
+            background: #f8fcff;
+        }
+        .fc-textarea {
+            min-height: 86px;
+            padding: 10px 12px 10px 34px;
+            resize: vertical;
+            line-height: 1.45;
+        }
+        select.fc { cursor: pointer; }
+
+        .toggle-pw {
+            position: absolute;
+            right: 11px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: var(--muted);
+            cursor: pointer;
+            font-size: 13px;
+            padding: 0;
+            transition: color .2s;
+        }
+        .toggle-pw:hover { color: var(--primary); }
+        .fc.has-toggle { padding-right: 36px; }
+
+        .btn-submit {
+            width: 100%;
+            padding: 11px;
+            background: linear-gradient(90deg, #0369a1 0%, var(--primary) 48%, var(--accent) 100%);
+            color: #fff;
+            border: none;
+            border-radius: var(--radius-md);
+            font-size: 13.5px;
+            font-weight: 700;
+            font-family: inherit;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+            box-shadow: 0 6px 20px rgba(2, 132, 199, 0.28);
+            transition: transform .18s, box-shadow .18s, filter .18s;
+        }
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 28px rgba(2, 132, 199, 0.36);
+            filter: brightness(1.03);
+        }
+        .btn-submit:active { transform: translateY(0); }
+
+        @media (max-width: 880px) {
+            .page-wrapper { grid-template-columns: 1fr; }
+            .panel-left { display: none; }
+            .panel-right { padding: 22px 18px; max-height: none; }
+        }
+        @media (max-width: 540px) {
+            .grid-2 { grid-template-columns: 1fr; }
         }
     </style>
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/admin/dashboard">
-                <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Admin
+
+<div class="particles" aria-hidden="true">
+    <div class="particle"></div>
+    <div class="particle"></div>
+    <div class="particle"></div>
+</div>
+
+<div class="page-wrapper">
+
+    <aside class="panel-left" aria-hidden="true">
+        <div class="brand-mark">
+            <div class="brand-icon"><i class="fas fa-tooth"></i></div>
+            <div class="brand-text">Cabinet Dentaire<small>Administration</small></div>
+        </div>
+        <div class="illus-center">
+            <i class="fas fa-heart-pulse illus-icon"></i>
+            <h2 class="illus-title">Espace Patient</h2>
+            <p class="illus-sub">Enregistrez un nouveau dossier avec des informations claires pour un suivi serein.</p>
+        </div>
+        <div class="chips">
+            <div class="chip"><i class="fas fa-calendar-check"></i> Prise de rendez-vous</div>
+            <div class="chip"><i class="fas fa-notes-medical"></i> Historique de soins</div>
+            <div class="chip"><i class="fas fa-user-shield"></i> Données protégées</div>
+            <div class="chip"><i class="fas fa-leaf"></i> Accompagnement bienveillant</div>
+        </div>
+    </aside>
+
+    <main class="panel-right">
+
+        <div class="admin-topbar">
+            <a href="index.php?route=/admin/patients" class="back-link">
+                <i class="fas fa-arrow-left"></i> Retour à la liste
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
+            <span class="admin-badge"><i class="fas fa-user-shield"></i>
+                <?php echo htmlspecialchars(($_SESSION['user_prenom'] ?? '') . ' ' . ($_SESSION['user_nom'] ?? '')); ?>
+            </span>
+        </div>
+
+        <div class="form-hd">
+            <h1><i class="fas fa-user-injured" style="color:var(--primary);margin-right:8px;"></i>Créer un compte patient</h1>
+            <p>Renseignez les informations du patient : les champs marqués d’un astérisque sont obligatoires.</p>
+        </div>
+
+        <?php if (!empty($_SESSION['error'])): ?>
+            <div class="al al-err" role="alert">
+                <i class="fas fa-exclamation-circle"></i>
+                <span><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?></span>
+            </div>
+        <?php endif; ?>
+        <?php if (!empty($_SESSION['success'])): ?>
+            <div class="al al-ok" role="alert">
+                <i class="fas fa-check-circle"></i>
+                <span><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?></span>
+            </div>
+        <?php endif; ?>
+
+        <form method="POST" action="index.php?route=/admin/patients/create" novalidate>
+
+            <div class="section-label">Informations personnelles</div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Nom <span class="req">*</span></label>
+                    <div class="field-wrap">
+                        <i class="fas fa-user fi"></i>
+                        <input type="text" name="nom" class="fc" placeholder="Dupont"
+                            value="<?php echo isset($_POST['nom']) ? htmlspecialchars($_POST['nom']) : ''; ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Prénom <span class="req">*</span></label>
+                    <div class="field-wrap">
+                        <i class="fas fa-user fi"></i>
+                        <input type="text" name="prenom" class="fc" placeholder="Camille"
+                            value="<?php echo isset($_POST['prenom']) ? htmlspecialchars($_POST['prenom']) : ''; ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Email <span class="req">*</span></label>
+                    <div class="field-wrap">
+                        <i class="fas fa-envelope fi"></i>
+                        <input type="email" name="email" class="fc" placeholder="patient@exemple.com"
+                            value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>" required>
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Téléphone</label>
+                    <div class="field-wrap">
+                        <i class="fas fa-phone fi"></i>
+                        <input type="tel" name="telephone" class="fc" placeholder="+212 6 XX XX XX XX"
+                            value="<?php echo isset($_POST['telephone']) ? htmlspecialchars($_POST['telephone']) : ''; ?>">
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-label">Santé et coordonnées</div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>Date de naissance</label>
+                    <div class="field-wrap">
+                        <i class="fas fa-calendar fi"></i>
+                        <input type="date" name="date_naissance" class="fc"
+                            value="<?php echo isset($_POST['date_naissance']) ? htmlspecialchars($_POST['date_naissance']) : ''; ?>">
+                    </div>
+                </div>
+                <div class="field">
+                    <label>Allergies</label>
+                    <div class="field-wrap">
+                        <i class="fas fa-notes-medical fi"></i>
+                        <input type="text" name="allergies" class="fc" placeholder="Ex. pénicilline, latex…"
+                            value="<?php echo isset($_POST['allergies']) ? htmlspecialchars($_POST['allergies']) : ''; ?>">
+                    </div>
+                </div>
+                <div class="field col-full">
+                    <label>Adresse</label>
+                    <div class="field-wrap textarea-wrap">
+                        <i class="fas fa-map-marker-alt fi"></i>
+                        <textarea name="adresse" class="fc fc-textarea" rows="3" placeholder="Adresse complète"><?php echo isset($_POST['adresse']) ? htmlspecialchars($_POST['adresse']) : ''; ?></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-label">Sécurité du compte</div>
+            <div class="grid-2">
+                <div class="field col-full">
+                    <label>Mot de passe <span class="req">*</span></label>
+                    <div class="field-wrap">
+                        <i class="fas fa-lock fi"></i>
+                        <input type="password" id="pw1" name="password" class="fc has-toggle" placeholder="Au moins 6 caractères" required minlength="6">
+                        <button type="button" class="toggle-pw" onclick="togglePw('pw1','eye1')" aria-label="Afficher le mot de passe">
+                            <i id="eye1" class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-submit" id="submitBtn">
+                <i class="fas fa-user-plus"></i> Créer le compte patient
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav me-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/dashboard">
-                            <i class="fas fa-tachometer-alt me-1"></i>Dashboard
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/medecins">
-                            <i class="fas fa-user-md me-1"></i>Médecins
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/secretaires">
-                            <i class="fas fa-user-secret me-1"></i>Secrétaires
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/admin/patients">
-                            <i class="fas fa-users me-1"></i>Patients
-                        </a>
-                    </li>
-                </ul>
-                <div class="d-flex align-items-center">
-                    <div class="user-info">
-                        <i class="fas fa-user-circle fa-lg"></i>
-                        <span><?php echo htmlspecialchars($_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom']); ?></span>
-                        <span class="role-badge">ADMIN</span>
-                    </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+        </form>
 
-    <div class="auth-wrap">
-        <div class="card register-card">
-            <div class="card-header card-header-custom">
-                <h4><i class="fas fa-user-plus me-2"></i>Ajouter un Patient</h4>
-                <p>Créer un nouveau dossier patient dans le système</p>
-            </div>
-            <div class="card-body card-body-custom">
-                <?php if (isset($_SESSION['success'])): ?>
-                    <div class="alert alert-success alert-dismissible fade show" role="alert">
-                        <i class="fas fa-check-circle me-2"></i><?php echo htmlspecialchars($_SESSION['success']); unset($_SESSION['success']); ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                <?php endif; ?>
-                <?php if (isset($_SESSION['error'])): ?>
-                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
-                        <i class="fas fa-exclamation-circle me-2"></i><?php echo htmlspecialchars($_SESSION['error']); unset($_SESSION['error']); ?>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
-                    </div>
-                <?php endif; ?>
-
-                <form method="POST" action="index.php?route=/admin/patients/create">
-                    <div class="row g-3">
-                    <!-- Nom -->
-                    <div class="col-md-6">
-                        <label class="form-label">Nom <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" name="nom" class="form-control" required placeholder="Nom du patient">
-                        </div>
-                    </div>
-                    
-                    <!-- Prénom -->
-                    <div class="col-md-6">
-                        <label class="form-label">Prénom <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-user"></i></span>
-                        <input type="text" name="prenom" class="form-control" required placeholder="Prénom du patient">
-                        </div>
-                    </div>
-                    
-                    <!-- Email -->
-                    <div class="col-md-6">
-                        <label class="form-label">Email <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-envelope"></i></span>
-                        <input type="email" name="email" class="form-control" required placeholder="email@exemple.com">
-                        </div>
-                    </div>
-                    
-                    <!-- Téléphone -->
-                    <div class="col-md-6">
-                        <label class="form-label">Téléphone <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                                <span class="input-group-text"><i class="fas fa-phone"></i></span>
-                        <input type="tel" name="telephone" class="form-control" required placeholder="+212 6 00 00 00 00">
-                        </div>
-                    </div>
-                    
-                    <div class="row g-3">
-
-<!-- Date de naissance -->
-<div class="col-md-6">
-    <label class="form-label">Date de naissance</label>
-
-    <div class="input-group">
-        <span class="input-group-text">
-            <i class="fas fa-calendar"></i>
-        </span>
-        <input type="date" name="date_naissance" class="form-control">
-    </div>
+    </main>
 </div>
 
-<!-- Allergies -->
-<div class="col-md-6">
-    <label class="form-label">Allergies</label>
-
-    <div class="input-group">
-        <span class="input-group-text">
-            <i class="fas fa-notes-medical"></i>
-        </span>
-        <input type="text" name="allergies" class="form-control" placeholder="Ex: pénicilline">
-    </div>
-</div>
-
-</div>
-                    
-                    
-                    <!-- Adresse -->
-                    <div class="col-12">
-                        <label class="form-label">Adresse</label>
-                        <div class="input-group">
-        <span class="input-group-text">
-            <i class="fas fa-map-marker-alt"></i>
-        </span>
-                        <textarea name="adresse" class="form-control" rows="3" placeholder="Adresse complète du patient"></textarea>
-                        </div>
-                    </div>
-                    
-                   
-                    
-                    <!-- Mot de passe -->
-                    <div class="col-12">
-                        <label class="form-label">Mot de passe <span class="text-danger">*</span></label>
-                        <div class="input-group">
-                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
-                        <input type="password" name="password" class="form-control" required minlength="6" placeholder="Mot de passe (minimum 6 caractères)">
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="col-12 mt-3">
-                            <button type="submit" class="btn btn-submit text-white w-100">
-                                <i class="fas fa-plus me-2"></i>S'inscrire
-                            </button>
-
-                    </div>
-                </form>
-                <div class="login-link">
-                    Déjà un compte ? <a href="index.php?route=/login">Se connecter</a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+    function togglePw(inputId, iconId) {
+        const inp = document.getElementById(inputId);
+        const icon = document.getElementById(iconId);
+        const show = inp.type === 'password';
+        inp.type = show ? 'text' : 'password';
+        icon.className = show ? 'fas fa-eye-slash' : 'fas fa-eye';
+    }
+    document.querySelector('form').addEventListener('submit', function () {
+        var btn = document.getElementById('submitBtn');
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Création en cours…';
+        btn.disabled = true;
+    });
+</script>
 </body>
 </html>

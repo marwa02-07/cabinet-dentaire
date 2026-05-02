@@ -36,6 +36,7 @@ $session_route_map = [
     '/register-secretaire' => 'SESS_ADMIN',
     '/register-patient'    => 'SESS_ADMIN',
     '/medecin'             => 'SESS_MEDECIN',
+    '/login/medecin'       => 'SESS_MEDECIN',
     '/secretaire'          => 'SESS_SECRETAIRE',
     '/api'                 => 'SESS_SECRETAIRE',
     '/patient'             => 'SESS_PATIENT',

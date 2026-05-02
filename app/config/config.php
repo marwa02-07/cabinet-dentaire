@@ -3,7 +3,7 @@
  * Configuration de l'application
  */
 
-define('DB_HOST', 'localhost');
+define('DB_HOST', '127.0.0.1');
 define('DB_NAME', 'cabinet_dentaire');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
