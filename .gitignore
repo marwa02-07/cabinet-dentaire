@@ -1,0 +1,48 @@
+# ==========================================
+# .gitignore - Cabinet Dentaire PHP MVC
+# ==========================================
+
+# --- Configuration sensible ---
+# Si vous avez un fichier de config avec des mots de passe DB, l'exclure.
+# Renommez config.php en config.example.php et ajoutez config.php ici.
+# app/config/config.php
+
+# --- Dépendances (si Composer utilisé) ---
+/vendor/
+composer.lock
+
+# --- Logs PHP/Serveur ---
+*.log
+/logs/
+/storage/logs/
+
+# --- Cache ---
+/storage/cache/
+/storage/framework/cache/
+
+# --- Fichiers de sessions PHP (si stockées sur disque) ---
+/storage/sessions/
+
+# --- Fichiers uploadés par les utilisateurs ---
+/public/uploads/
+/uploads/
+
+# --- Fichiers de build/IDE ---
+.DS_Store
+Thumbs.db
+desktop.ini
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# --- Variables d'environnement ---
+.env
+.env.local
+.env.*.local
+
+# --- Fichiers temporaires ---
+*.tmp
+*.temp
+/tmp/
