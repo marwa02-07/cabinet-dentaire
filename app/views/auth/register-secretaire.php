@@ -228,7 +228,7 @@
     <main class="panel-right">
 
         <div class="admin-topbar">
-            <a href="index.php?route=/admin/secretaires" class="back-link">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires" class="back-link">
                 <i class="fas fa-arrow-left"></i> Retour à la liste
             </a>
             <span class="admin-badge"><i class="fas fa-user-shield"></i>
@@ -254,7 +254,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="index.php?route=/register-secretaire" novalidate>
+        <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/register-secretaire" novalidate>
 
             <div class="section-label">Informations personnelles</div>
             <div class="grid-2">

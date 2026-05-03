@@ -31,14 +31,14 @@ $date_creation = $date_creation ?? date('Y-m-d');
 <body class="bg-light">
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="container">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard"><i class="fas fa-tooth"></i> Cabinet Dentaire</a>
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard"><i class="fas fa-tooth"></i> Cabinet Dentaire</a>
             <div class="collapse navbar-collapse justify-content-end">
                 <ul class="navbar-nav me-3">
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?route=/medecin/dashboard">Dashboard</a></li>
-                    <li class="nav-item"><a class="nav-link text-white" href="index.php?route=/medecin/rendez-vous">Rendez-vous</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">Dashboard</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">Rendez-vous</a></li>
                 </ul>
                 <span class="navbar-text text-white me-3"><i class="fas fa-user-md"></i> Dr. <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?></span>
-                <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm">Déconnexion</a>
+                <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm">Déconnexion</a>
             </div>
         </div>
     </nav>
@@ -49,7 +49,7 @@ $date_creation = $date_creation ?? date('Y-m-d');
                 <h1 class="h3">Nouvelle ordonnance</h1>
                 <p class="text-muted mb-0">Rédigez une ordonnance pour le patient sélectionné.</p>
             </div>
-            <a href="index.php?route=/medecin/ordonnance/select" class="btn btn-secondary">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/ordonnance/select" class="btn btn-secondary">
                 <i class="fas fa-arrow-left"></i> Retour à la sélection
             </a>
         </div>
@@ -112,7 +112,7 @@ $date_creation = $date_creation ?? date('Y-m-d');
             </div>
         </div>
 
-        <form action="index.php?route=/medecin/ordonnance/store" method="POST">
+        <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/ordonnance/store" method="POST">
             <input type="hidden" name="rendez_vous_id" value="<?php echo (int)($rendezVous['id'] ?? 0); ?>">
             <input type="hidden" name="patient_id" value="<?php echo (int)($patient['id'] ?? 0); ?>">
 

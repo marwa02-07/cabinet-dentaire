@@ -192,7 +192,7 @@ $medecin = $medecin ?? [];
 <body>
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Médecin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -201,22 +201,22 @@ $medecin = $medecin ?? [];
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/medecin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">
                             <i class="fas fa-calendar-alt me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/consultation/select">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select">
                             <i class="fas fa-stethoscope me-1"></i>Consultations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/profile">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile">
                             <i class="fas fa-user-cog me-1"></i>Mon Profil
                         </a>
                     </li>
@@ -226,7 +226,7 @@ $medecin = $medecin ?? [];
                         <i class="fas fa-user-md"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -240,7 +240,7 @@ $medecin = $medecin ?? [];
                     <h1 class="welcome-title">Mes rendez-vous</h1>
                     <p class="welcome-sub">Gérez les statuts, lancez les consultations et accédez aux dossiers patients.</p>
                 </div>
-                <a href="index.php?route=/medecin/dashboard" class="btn btn-outline-light btn-sm">
+                <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard" class="btn btn-outline-light btn-sm">
                     <i class="fas fa-arrow-left me-1"></i>Retour dashboard
                 </a>
             </div>
@@ -310,15 +310,15 @@ $medecin = $medecin ?? [];
                                     <td><span class="badge-status <?php echo $badgeClass; ?>"><?php echo htmlspecialchars(ucfirst($rdv['statut'])); ?></span></td>
                                     <td><span class="motif-text" title="<?php echo htmlspecialchars($rdv['motif']); ?>"><?php echo htmlspecialchars($rdv['motif']); ?></span></td>
                                     <td class="text-end">
-                                        <a href="index.php?route=/medecin/patient/<?php echo (int)$rdv['rdv_patient_id']; ?>" class="btn btn-sm btn-info btn-action me-1" title="Voir dossier patient">
+                                        <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/patient/<?php echo (int)$rdv['rdv_patient_id']; ?>" class="btn btn-sm btn-info btn-action me-1" title="Voir dossier patient">
                                             <i class="fas fa-eye"></i>
                                         </a>
-                                        <a href="index.php?route=/medecin/consultation/create&id=<?php echo (int)$rdv['rdv_id']; ?>" class="btn btn-sm btn-primary btn-action me-1" title="Lancer consultation">
+                                        <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/create&id=<?php echo (int)$rdv['rdv_id']; ?>" class="btn btn-sm btn-primary btn-action me-1" title="Lancer consultation">
                                             <i class="fas fa-stethoscope"></i>
                                         </a>
                                         <?php if ($rdv['statut'] !== 'annulé' && $rdv['statut'] !== 'complété'): ?>
                                             <?php if ($rdv['statut'] !== 'confirmé'): ?>
-                                                <form action="index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
+                                                <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
                                                     <input type="hidden" name="rendez_vous_id" value="<?php echo (int)$rdv['rdv_id']; ?>">
                                                     <input type="hidden" name="status" value="confirmé">
                                                     <button type="submit" class="btn-confirm" title="Confirmer">
@@ -326,14 +326,14 @@ $medecin = $medecin ?? [];
                                                     </button>
                                                 </form>
                                             <?php endif; ?>
-                                            <form action="index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
+                                            <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
                                                 <input type="hidden" name="rendez_vous_id" value="<?php echo (int)$rdv['rdv_id']; ?>">
                                                 <input type="hidden" name="status" value="complété">
                                                 <button type="submit" class="btn-complete" title="Compléter">
                                                     <i class="fas fa-check-circle"></i> Compléter
                                                 </button>
                                             </form>
-                                            <form action="index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
+                                            <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous/status" method="POST" class="d-inline status-form" data-id="<?php echo (int)$rdv['rdv_id']; ?>">
                                                 <input type="hidden" name="rendez_vous_id" value="<?php echo (int)$rdv['rdv_id']; ?>">
                                                 <input type="hidden" name="status" value="annulé">
                                                 <button type="submit" class="btn-cancel" title="Annuler">

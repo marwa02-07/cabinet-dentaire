@@ -197,7 +197,7 @@ $rendezVous = $rendezVous ?? [];
 <body>
     <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Médecin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -206,22 +206,22 @@ $rendezVous = $rendezVous ?? [];
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/medecin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">
                             <i class="fas fa-calendar-alt me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/consultation/select">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select">
                             <i class="fas fa-stethoscope me-1"></i>Consultations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/profile">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile">
                             <i class="fas fa-user-cog me-1"></i>Mon Profil
                         </a>
                     </li>
@@ -231,7 +231,7 @@ $rendezVous = $rendezVous ?? [];
                         <i class="fas fa-user-md"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -246,7 +246,7 @@ $rendezVous = $rendezVous ?? [];
                     <h1 class="welcome-title"><i class="fas fa-file-medical-alt me-2"></i>Nouvelle consultation</h1>
                     <p class="welcome-sub">Enregistrez la consultation et rattachez une ordonnance si nécessaire.</p>
                 </div>
-                <a href="index.php?route=/medecin/rendez-vous" class="btn btn-outline-secondary btn-secondary-custom"><i class="fas fa-arrow-left me-2"></i>Retour aux rendez-vous</a>
+                <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="btn btn-outline-secondary btn-secondary-custom"><i class="fas fa-arrow-left me-2"></i>Retour aux rendez-vous</a>
             </div>
         </div>
 
@@ -289,7 +289,7 @@ $rendezVous = $rendezVous ?? [];
             </div>
         </div>
 
-        <form action="index.php?route=/medecin/consultation/store" method="POST" id="consultationForm">
+        <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/store" method="POST" id="consultationForm">
             <input type="hidden" name="rendez_vous_id" value="<?php echo htmlspecialchars($rendezVous['id'] ?? '', ENT_QUOTES, 'UTF-8'); ?>">
             <div class="card-custom mb-4">
                 <div class="card-header card-header-consultation">
@@ -398,7 +398,7 @@ $rendezVous = $rendezVous ?? [];
             </div>
 
             <div class="d-flex justify-content-between align-items-center mb-5">
-                <a href="index.php?route=/medecin/rendez-vous" class="btn btn-outline-secondary btn-secondary-custom"><i class="fas fa-times me-2"></i>Annuler</a>
+                <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="btn btn-outline-secondary btn-secondary-custom"><i class="fas fa-times me-2"></i>Annuler</a>
                 <button type="submit" class="btn btn-primary btn-primary-custom" id="submitBtn" onclick="return validateAndSubmit(this);">
                     <i class="fas fa-check-circle me-2"></i>Terminer la consultation
                 </button>

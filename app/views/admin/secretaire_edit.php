@@ -188,7 +188,7 @@ $secretaire = $secretaire ?? [
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/admin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -197,17 +197,17 @@ $secretaire = $secretaire ?? [
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/dashboard">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/medecins">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/medecins">
                             <i class="fas fa-user-md me-1"></i>Médecins
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/admin/secretaires">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires">
                             <i class="fas fa-user-secret me-1"></i>Secrétaires
                         </a>
                     </li>
@@ -218,7 +218,7 @@ $secretaire = $secretaire ?? [
                         <?php echo htmlspecialchars($_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom']); ?>
                         <span class="role-badge ms-2">ADMIN</span>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -260,7 +260,7 @@ $secretaire = $secretaire ?? [
                             <div class="alert alert-success"><?php echo $_SESSION['success']; unset($_SESSION['success']); ?></div>
                         <?php endif; ?>
 
-                        <form method="POST" action="index.php?route=/admin/secretaire/update">
+                        <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/admin/secretaire/update">
                             <input type="hidden" name="id" value="<?php echo htmlspecialchars($secretaire['id']); ?>">
                             <input type="hidden" name="user_id" value="<?php echo htmlspecialchars($secretaire['user_id'] ?? ''); ?>">
                             
@@ -296,7 +296,7 @@ $secretaire = $secretaire ?? [
                                 <button type="submit" class="btn btn-primary-custom">
                                     <i class="fas fa-save me-1"></i>Enregistrer
                                 </button>
-                                <a href="index.php?route=/admin/secretaires" class="btn btn-secondary">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires" class="btn btn-secondary">
                                     <i class="fas fa-arrow-left me-1"></i>Retour
                                 </a>
                             </div>

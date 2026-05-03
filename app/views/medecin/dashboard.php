@@ -250,7 +250,7 @@
 <body>
     <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Médecin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -259,22 +259,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/medecin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">
                             <i class="fas fa-calendar-alt me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/consultation/select">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select">
                             <i class="fas fa-stethoscope me-1"></i>Consultations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/profile">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile">
                             <i class="fas fa-user-cog me-1"></i>Mon Profil
                         </a>
                     </li>
@@ -284,7 +284,7 @@
                         <i class="fas fa-user-md"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -336,7 +336,7 @@
                         <h2 class="panel-title h6 mb-0">
                             <i class="fas fa-wave-square me-2 text-primary"></i>Résumé rapide
                         </h2>
-                        <a href="index.php?route=/medecin/rendez-vous" class="btn btn-primary-custom btn-sm">Planning</a>
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="btn btn-primary-custom btn-sm">Planning</a>
                     </div>
                     <p class="text-muted small fw-semibold mb-0 mt-2">
                         Continuez le suivi des dossiers patients et des consultations en quelques clics.
@@ -352,7 +352,7 @@
                         <h2 class="panel-title h5 mb-0">
                             <i class="fas fa-calendar-alt me-2 text-primary"></i>Planning à venir
                         </h2>
-                        <a href="index.php?route=/medecin/rendez-vous" class="btn btn-primary-custom btn-sm">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="btn btn-primary-custom btn-sm">
                             Voir tout
                         </a>
                     </div>
@@ -411,21 +411,21 @@
                     </div>
                     <div class="row g-3">
                         <div class="col-12">
-                            <a href="index.php?route=/medecin/rendez-vous" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-calendar-alt"></i></div>
                                 <p class="menu-title">Gérer les rendez-vous</p>
                                 <p class="menu-desc">Consultez votre agenda et mettez à jour les statuts.</p>
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="index.php?route=/medecin/consultation/select" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-stethoscope"></i></div>
                                 <p class="menu-title">Consultations</p>
                                 <p class="menu-desc">Ajoutez le suivi médical et les notes cliniques.</p>
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="index.php?route=/medecin/profile" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-user-cog"></i></div>
                                 <p class="menu-title">Mon profil</p>
                                 <p class="menu-desc">Mettez à jour vos informations personnelles.</p>

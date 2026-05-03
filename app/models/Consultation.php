@@ -44,6 +44,23 @@ class Consultation extends Model
     }
 
     /**
+     * Récupérer une consultation par son ID
+     */
+    public function getById($id)
+    {
+        try {
+            $query = "SELECT c.* FROM consultations c WHERE c.id = :id LIMIT 1";
+            $stmt = $this->pdo->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+        } catch (PDOException $e) {
+            error_log("Erreur PDO getById Consultation: " . $e->getMessage());
+            return false;
+        }
+    }
+
+    /**
      * Récupérer les consultations d'un patient
      */
     public function getByPatientId($patient_id)

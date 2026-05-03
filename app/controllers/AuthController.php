@@ -311,7 +311,7 @@ class AuthController extends Controller
         $email = isset($_POST['email']) ? trim(strtolower($_POST['email'])) : '';
         $password = isset($_POST['password']) ? $_POST['password'] : '';
         $confirm_password = isset($_POST['confirm_password']) ? $_POST['confirm_password'] : '';
-        $specialite = isset($_POST['specialite']) ? trim($_POST['specialite']) : '';
+        $specialite = ConsultationTypeCatalog::normalize($_POST['specialite'] ?? '');
         $numero_licence = isset($_POST['numero_licence']) ? trim($_POST['numero_licence']) : '';
         $telephone = isset($_POST['telephone']) ? trim($_POST['telephone']) : '';
         $cabinet = isset($_POST['cabinet']) ? trim($_POST['cabinet']) : '';
@@ -319,6 +319,12 @@ class AuthController extends Controller
         // Validation
         if (empty($nom) || empty($prenom) || empty($email) || empty($password) || empty($confirm_password) || empty($specialite) || empty($numero_licence)) {
             $_SESSION['register_error'] = 'Veuillez remplir tous les champs obligatoires';
+            header('Location: index.php?route=/register-medecin');
+            exit();
+        }
+
+        if (!ConsultationTypeCatalog::isValid($specialite)) {
+            $_SESSION['register_error'] = 'Spécialité invalide. Veuillez choisir une valeur autorisée.';
             header('Location: index.php?route=/register-medecin');
             exit();
         }
@@ -524,8 +530,8 @@ class AuthController extends Controller
         $user = $this->userModel->findByEmail($email);
         
         if (!$user) {
-            error_log("Utilisateur NON trouvé pour l'email: " . $email);
-            $_SESSION['login_error'] = 'Email ou mot de passe incorrect';
+            error_log("Utilisateur NON trouvé pour l'identifiant: " . $email);
+            $_SESSION['login_error'] = 'Identifiant ou mot de passe incorrect';
             header('Location: index.php?route=/login');
             exit();
         }
@@ -537,7 +543,7 @@ class AuthController extends Controller
         // Vérifier le mot de passe avec password_verify() (sécurisé avec bcrypt)
         if (!password_verify($password, $user['password'])) {
             error_log("Mot de passe INCORRECT pour: " . $email);
-            $_SESSION['login_error'] = 'Email ou mot de passe incorrect';
+            $_SESSION['login_error'] = 'Identifiant ou mot de passe incorrect';
             header('Location: index.php?route=/login');
             exit();
         }

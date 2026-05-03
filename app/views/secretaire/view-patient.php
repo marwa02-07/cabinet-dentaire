@@ -6,12 +6,12 @@
     <title>Voir Patient - Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/secretaire-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/secretaire-theme.css" rel="stylesheet">
 </head>
 <body class="secretaire-body">
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/secretaire/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Secrétaire
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/secretaire/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/rendezvous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous">
                             <i class="fas fa-calendar-check me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/patients">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/planning">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning">
                             <i class="fas fa-calendar-alt me-1"></i>Planning
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                         <i class="fas fa-user-tie"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -185,13 +185,13 @@
 
         <!-- Actions -->
         <div class="text-end mt-3">
-            <a href="index.php?route=/secretaire/patients" class="btn btn-outline-secondary">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-1"></i>Retour à la liste
             </a>
-            <a href="index.php?route=/secretaire/patients/edit&id=<?php echo $patient['id']; ?>" class="btn btn-primary-custom ms-2">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients/edit&id=<?php echo $patient['id']; ?>" class="btn btn-primary-custom ms-2">
                 <i class="fas fa-edit me-1"></i>Modifier
             </a>
-            <a href="index.php?route=/secretaire/rendezvous/create&patient_id=<?php echo $patient['id']; ?>" class="btn btn-success ms-2">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/create&patient_id=<?php echo $patient['id']; ?>" class="btn btn-success ms-2">
                 <i class="fas fa-plus me-1"></i>Nouveau RDV
             </a>
         </div>

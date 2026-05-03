@@ -375,6 +375,61 @@ class MedecinController extends Controller
     }
 
     /**
+     * Affiche une consultation enregistrée et propose l'impression
+     */
+    public function printConsultation()
+    {
+        Auth::role('medecin');
+        $user = Auth::user();
+
+        $consultation_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if (!$consultation_id) {
+            die("✗ Erreur : consultation invalide.");
+        }
+
+        $medecinModel = new Medecin();
+        $medecin = $medecinModel->findByUserId($user['id']);
+        if (!$medecin) {
+            die("✗ Erreur : profil médecin introuvable.");
+        }
+
+        $consultationModel = new Consultation();
+        $consultationModel->setPdo((new Database())->getPdo());
+        $consultation = $consultationModel->getById($consultation_id);
+
+        if (!$consultation || $consultation['dentiste_id'] !== $medecin['id']) {
+            die("✗ Erreur : consultation introuvable ou accès refusé.");
+        }
+
+        $rendezVousModel = new RendezVous();
+        $rendezVousModel->setPdo((new Database())->getPdo());
+        $rendezVous = $rendezVousModel->getById($consultation['rendez_vous_id']);
+
+        $patientModel = new Patient();
+        $patientModel->setPdo((new Database())->getPdo());
+        $patient = $patientModel->findById($consultation['patient_id']);
+
+        $ordonnanceModel = new Ordonnance();
+        $ordonnanceMedModel = new OrdonnanceMedicaments();
+        $ordonnanceModel->setPdo((new Database())->getPdo());
+        $ordonnanceMedModel->setPdo((new Database())->getPdo());
+
+        $ordonnance = $ordonnanceModel->findByConsultationId($consultation_id);
+        if ($ordonnance) {
+            $ordonnance['medicaments'] = $ordonnanceMedModel->getByOrdonnanceId($ordonnance['id']);
+        }
+
+        $this->view('medecin.consultation_print', [
+            'user' => $user,
+            'medecin' => $medecin,
+            'consultation' => $consultation,
+            'rendezVous' => $rendezVous,
+            'patient' => $patient,
+            'ordonnance' => $ordonnance
+        ]);
+    }
+
+    /**
      * Enregistre une consultation créée par le médecin
      */
     public function storeConsultation()
@@ -592,7 +647,7 @@ class MedecinController extends Controller
             if ($ordonnanceCreated) {
                 $_SESSION['success'] .= ' Ordonnance rattachée.';
             }
-            header('Location: index.php?route=/medecin/rendez-vous');
+            header('Location: index.php?route=/medecin/consultation/print&id=' . $consultationId);
             exit();
         } catch (Exception $e) {
             if ($pdo->inTransaction()) {
@@ -712,12 +767,18 @@ class MedecinController extends Controller
         $prenom = trim($_POST['prenom'] ?? '');
         $email = trim($_POST['email'] ?? '');
         $telephone = trim($_POST['telephone'] ?? '');
-        $specialite = trim($_POST['specialite'] ?? '');
+        $specialite = ConsultationTypeCatalog::normalize($_POST['specialite'] ?? '');
         $numero_licence = trim($_POST['numero_licence'] ?? '');
         $cabinet = trim($_POST['cabinet'] ?? '');
 
         if (empty($nom) || empty($prenom) || empty($email)) {
             $_SESSION['error'] = 'Veuillez remplir tous les champs obligatoires.';
+            header('Location: index.php?route=/medecin/profile');
+            exit();
+        }
+
+        if (!ConsultationTypeCatalog::isValid($specialite)) {
+            $_SESSION['error'] = 'Spécialité invalide. Veuillez choisir une valeur autorisée.';
             header('Location: index.php?route=/medecin/profile');
             exit();
         }

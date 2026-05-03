@@ -6,7 +6,7 @@
     <title>Imprimer Planning - <?php echo date('d/m/Y', strtotime($date)); ?></title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/secretaire-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/secretaire-theme.css" rel="stylesheet">
     <style>
         @media print {
             body { padding: 0 !important; margin: 0; }
@@ -19,7 +19,7 @@
 <body class="print-planning-shell print-plan-shell">
     <div class="container py-3">
         <div class="no-print mb-3">
-            <a href="index.php?route=/secretaire/dashboard" class="btn btn-outline-secondary">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard" class="btn btn-outline-secondary">
                 <i class="fas fa-arrow-left me-1"></i>Retour
             </a>
             <button type="button" onclick="window.print()" class="btn btn-primary-custom ms-2 border-0">

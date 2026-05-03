@@ -240,7 +240,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/admin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                 <i class="fas fa-tooth me-2"></i>
                 Cabinet Dentaire - Admin
             </a>
@@ -252,22 +252,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/admin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/medecins">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/medecins">
                             <i class="fas fa-user-md me-1"></i>Médecins
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/secretaires">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires">
                             <i class="fas fa-user-secret me-1"></i>Secrétaires
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/patients">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
@@ -279,7 +279,7 @@
                         <?php echo htmlspecialchars($_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom']); ?>
                         <span class="role-badge ms-2">ADMIN</span>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -310,10 +310,10 @@
                     </div>
 
                     <div class="d-flex flex-wrap gap-2">
-                        <a href="index.php?route=/register-medecin" class="btn btn-outline-dark">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/register-medecin" class="btn btn-outline-dark">
                             <i class="fas fa-user-plus me-2"></i>Nouveau médecin
                         </a>
-                        <a href="index.php?route=/register-secretaire" class="btn btn-outline-dark">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/register-secretaire" class="btn btn-outline-dark">
                             <i class="fas fa-user-secret me-2"></i>Ajouter secrétaire
                         </a>
                     </div>
@@ -410,7 +410,7 @@
 
                         <div class="row g-3">
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/register-medecin" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/register-medecin" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-blue">
                                         <i class="fas fa-user-plus"></i>
                                     </div>
@@ -423,7 +423,7 @@
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/admin/medecins" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/admin/medecins" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-blue">
                                         <i class="fas fa-list"></i>
                                     </div>
@@ -436,7 +436,7 @@
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/register-secretaire" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/register-secretaire" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-green">
                                         <i class="fas fa-user-secret"></i>
                                     </div>
@@ -449,7 +449,7 @@
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/admin/secretaires" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-green">
                                         <i class="fas fa-cogs"></i>
                                     </div>
@@ -462,7 +462,7 @@
                             </div>
 
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/register-patient" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/register-patient" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-indigo">
                                         <i class="fas fa-user-plus"></i>
                                     </div>
@@ -481,7 +481,7 @@
                            
 
                             <div class="col-12 col-md-6">
-                                <a href="index.php?route=/admin/patients" class="quick-tile p-3 d-flex align-items-center gap-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/admin/patients" class="quick-tile p-3 d-flex align-items-center gap-3">
                                     <div class="quick-ico grad-indigo">
                                         <i class="fas fa-users"></i>
                                     </div>

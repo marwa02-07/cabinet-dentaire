@@ -119,46 +119,20 @@ class Medecin extends Model
     public function getBySpecialite($specialite)
     {
         try {
-            // Récupérer tous les dentistes
-            $allDentistes = $this->findAll();
-            
-            if (empty($allDentistes)) {
+            $specialiteNormalized = ConsultationTypeCatalog::normalize($specialite);
+            if ($specialiteNormalized === '') {
                 return [];
             }
-            
-            // Mots-clés par type de spécialité
-            $keywordsMap = [
-                'consultation' => ['consultation', 'dentaire', 'odontologie', 'généraliste', 'generaliste', 'général', 'general'],
-                'nettoyage' => ['nettoyage', 'hygiène', 'hygiene', 'prophylaxie', 'parodontie', 'détartrage', 'detartrage'],
-                'extraction' => ['extraction', 'chirurgie', 'orale', 'chirurgical', 'implantologie'],
-                'traitement' => ['traitement', 'endodontie', 'restauration', 'obturation', 'prothèse', 'prothese', 'odontologie', 'parodontie'],
-                'blanchiment' => ['blanchiment', 'esthétique', 'esthetique', 'cosmétique', 'cosmetique', 'esthetique'],
-                'radio' => ['radio', 'imagerie', 'radiologie', 'scanner', 'panoramique', 'cone beam']
-            ];
-            
-            $keywords = $keywordsMap[$specialite] ?? [$specialite];
-            
-            // Filtrer les dentistes par mots-clés
+
+            $allDentistes = $this->findAll();
             $filtered = [];
             foreach ($allDentistes as $dentiste) {
-                $dentisteSpecialite = strtolower($dentiste['specialite'] ?? '');
-                $match = false;
-                
-                foreach ($keywords as $keyword) {
-                    if (strpos($dentisteSpecialite, $keyword) !== false) {
-                        $match = true;
-                        break;
-                    }
-                }
-                
-                // Accepter si pas de spécialité définie ou si correspondance trouvée
-                if ($match || empty($dentiste['specialite'])) {
+                if (ConsultationTypeCatalog::matches($dentiste['specialite'] ?? '', $specialiteNormalized)) {
                     $filtered[] = $dentiste;
                 }
             }
-            
+
             return $filtered;
-            
         } catch (PDOException $e) {
             error_log("Erreur PDO getBySpecialite: " . $e->getMessage());
             return [];
@@ -182,29 +156,8 @@ class Medecin extends Model
             if (!$dentiste) {
                 return false;
             }
-            
-            // Mots-clés par type de spécialité
-            $keywordsMap = [
-                'consultation' => ['consultation', 'dentaire', 'odontologie', 'généraliste', 'generaliste', 'général', 'general'],
-                'nettoyage' => ['nettoyage', 'hygiène', 'hygiene', 'prophylaxie', 'parodontie', 'détartrage', 'detartrage'],
-                'extraction' => ['extraction', 'chirurgie', 'orale', 'chirurgical', 'implantologie'],
-                'traitement' => ['traitement', 'endodontie', 'restauration', 'obturation', 'prothèse', 'prothese', 'odontologie', 'parodontie'],
-                'blanchiment' => ['blanchiment', 'esthétique', 'esthetique', 'cosmétique', 'cosmetique', 'esthetique'],
-                'radio' => ['radio', 'imagerie', 'radiologie', 'scanner', 'panoramique', 'cone beam']
-            ];
-            
-            $keywords = $keywordsMap[$specialite] ?? [$specialite];
-            $dentisteSpecialite = strtolower($dentiste['specialite'] ?? '');
-            
-            // Vérifier si un des mots-clés correspond
-            foreach ($keywords as $keyword) {
-                if (strpos($dentisteSpecialite, $keyword) !== false) {
-                    return $dentiste;
-                }
-            }
-            
-            // Par défaut, accepter si pas de spécialité définie
-            return empty($dentiste['specialite']) ? $dentiste : false;
+
+            return ConsultationTypeCatalog::matches($dentiste['specialite'] ?? '', $specialite) ? $dentiste : false;
             
         } catch (PDOException $e) {
             return false;

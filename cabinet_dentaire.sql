@@ -192,19 +192,45 @@ CREATE TABLE factures (
 -- =====================================================
 
 -- Utilisateurs de test
--- Admin: admin@cabinet.com / 123456
+-- Admin: ensiasd / ENSIASD2026
 -- Dentiste: dentiste@cabinet.com / 123456
 -- Secrétaire: secretaire@cabinet.com / 123456
 -- Patient: patient@cabinet.com / 123456
+-- =========================
+-- USERS (ADMIN + DENTISTE + SECRETAIRE + PATIENT + DENTISTES)
+-- =========================
 INSERT INTO users (nom, prenom, email, password, role) VALUES
-('Admin', 'System', 'admin@cabinet.com', '$2y$10$LRJJyGXvV.5vdHl2XvTpYO21.7rkFmMQnVzPUIIBydFKjNfdiA1tS', 'admin'),
+
+-- Admin
+('ENSIASD', 'Administrateur', 'ensiasd', '$2y$10$Ngo5BqdHYWC.7D2aXUyIJeaB1BDKzul6agzJjYnd73vFyzAmDjG7O', 'admin'),
+
+-- Dentiste principal
 ('Bensalem', 'Youssef', 'dentiste@cabinet.com', '$2y$10$DFowLG4khDB3uh9Vr8hz2uVmkX15.voL8NIy4vW5CjO9.7bpinD9i', 'dentiste'),
+
+-- Secretaire
 ('El Amrani', 'Fatima', 'secretaire@cabinet.com', '$2y$10$SlVBFjzt0XssqAM6pAUkheIlag1UVmrmMgk7Rbc5udxQgM/GxdiRa', 'secretaire'),
-('Alaoui', 'Mehdi', 'patient@cabinet.com', '$2y$10$LRJJyGXvV.5vdHl2XvTpYO21.7rkFmMQnVzPUIIBydFKjNfdiA1tS', 'patient');
+
+-- Patient
+('Alaoui', 'Mehdi', 'patient@cabinet.com', '$2y$10$LRJJyGXvV.5vdHl2XvTpYO21.7rkFmMQnVzPUIIBydFKjNfdiA1tS', 'patient'),
+
+('Amine', 'El Amrani', 'med1@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste'),
+('Youssef', 'Benali', 'med2@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lmxGEtVyNHiKi', 'dentiste'),
+('Omar', 'Alaoui', 'med3@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste'),
+('Karim', 'Tazi', 'med4@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste'),
+('Hamza', 'Idrissi', 'med5@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste'),
+('Mehdi', 'Bennani', 'med6@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste'),
+('Rachid', 'Zerouali', 'med7@cabinet.com', '$2y$10$slYQmyNdGzin7olVZeNewOSFihO02X5UqQ8opY2lTmxGEtVyNHiKi', 'dentiste');
 
 -- Dentiste
 INSERT INTO dentistes (user_id, specialite, numero_licence, telephone, cabinet) VALUES
-(2, 'Chirurgie Dentaire', 'CD-001', '+212 6 11 22 33 44', 'Cabinet Dentaire Central, Casablanca');
+(2, 'Consultation', 'CD-001', '+212 6 11 22 33 44', 'Cabinet Dentaire Central, Casablanca'),
+(5,  'Consultation', 'CONS-001', '+212600000001', 'Cabinet Central , Casablanca'),
+(6,  'Nettoyage',    'NET-001',  '+212600000002', 'Cabinet Central , Casablanca'),
+(7,  'Extraction',   'EXT-001',  '+212600000003', 'Cabinet Central , Casablanca'),
+(8,  'Traitement',   'TRT-001',  '+212600000004', 'Cabinet Central , Casablanca'),
+(9,  'Blanchiment',  'BL-001',   '+212600000005', 'Cabinet Central , Casablanca'),
+(10, 'Radio',        'RAD-001',  '+212600000006', 'Cabinet Central, Casablanca'),
+(11, 'Autre',        'AUT-001',  '+212600000007', 'Cabinet Central, Casablanca');
 
 -- Secrétaire
 INSERT INTO secretaires (user_id, telephone, departement) VALUES
@@ -222,6 +248,15 @@ INSERT INTO rendez_vous (patient_id, dentiste_id, secretaire_id, date_heure, dur
 -- Consultation de test
 INSERT INTO consultations (rendez_vous_id, dentiste_id, patient_id, diagnostic, traitement_effectue, dents_traitees, prix) VALUES
 (1, 1, 1, 'Carie sur dent 46', 'Obturation composite', '46', 350.00);
+
+-- Ordonnance de test
+INSERT INTO ordonnances (patient_id, dentiste_id, rendez_vous_id, consultation_id, num_ordonnance, date_creation, instructions, recommandations) VALUES
+(1, 1, 1, 1, 'ORD-2026-0001', CURDATE(), 'Prendre les médicaments après les repas.', 'Contrôle dans 7 jours');
+
+-- Médicaments de l'ordonnance de test
+INSERT INTO ordonnance_medicaments (ordonnance_id, nom_medicament, dosage, frequence, duree, instructions_medicament) VALUES
+(1, 'Amoxicilline', '500 mg', '3 fois par jour', '7 jours', 'A prendre avec de l''eau'),
+(1, 'Paracétamol', '1 g', '2 fois par jour', '3 jours', 'En cas de douleur');
 
 -- Facture de test
 INSERT INTO factures (patient_id, consultation_id, numero_facture, date_facture, montant, montant_regle, reste_a_payer, statut, mode_paiement) VALUES

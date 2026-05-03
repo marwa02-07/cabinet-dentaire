@@ -22,6 +22,8 @@ return [
         '/patient/rendez-vous/available-dates' => ['PatientController', 'availableBookingDates'],
         '/patient/rendez-vous/available-slots' => ['PatientController', 'availableBookingSlots'],
         '/patient/consultations' => ['PatientController', 'consultations'],
+        '/patient/consultation/print' => ['PatientController', 'printConsultation'],
+        '/patient/consultation/print/:id' => ['PatientController', 'printConsultation'],
         '/patient/profile' => ['PatientController', 'profile'],
         // Routes Médecin/Dentiste
         '/medecin/dashboard' => ['MedecinController', 'dashboard'],
@@ -30,6 +32,8 @@ return [
         '/medecin/consultation/select' => ['MedecinController', 'selectConsultation'],
         '/medecin/consultation/create' => ['MedecinController', 'createConsultation'],
         '/medecin/consultation/create/:id' => ['MedecinController', 'createConsultation'],
+        '/medecin/consultation/print' => ['MedecinController', 'printConsultation'],
+        '/medecin/consultation/print/:id' => ['MedecinController', 'printConsultation'],
         '/medecin/ordonnance/select' => ['MedecinController', 'selectOrdonnance'],
         '/medecin/ordonnance/create' => ['MedecinController', 'createOrdonnance'],
         '/medecin/ordonnance/create/:id' => ['MedecinController', 'createOrdonnance'],

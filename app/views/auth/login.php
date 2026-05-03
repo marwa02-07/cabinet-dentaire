@@ -425,21 +425,21 @@
                         <a href="index.php" class="btn btn-outline-secondary" style="border-radius: 8px; font-weight: 600; padding: 8px 16px; transition: all 0.2s;">
                             <i class="fas fa-arrow-left"></i> Retour à l'accueil
                         </a>
-                        <a href="index.php?route=/register" class="btn btn-primary" style="background: var(--cyan); border: none; border-radius: 8px; font-weight: 600; padding: 8px 16px; transition: all 0.2s;">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/register" class="btn btn-primary" style="background: var(--cyan); border: none; border-radius: 8px; font-weight: 600; padding: 8px 16px; transition: all 0.2s;">
                             <i class="fas fa-user-plus"></i> S'inscrire
                         </a>
                     </div>
                 </div>
 
                 <!-- Formulaire de connexion -->
-                <form method="POST" action="index.php?route=/login" class="login-form">
-                    <!-- Champ Email -->
+                <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/login" class="login-form">
+                    <!-- Champ Identifiant -->
                     <div class="form-group">
-                        <label for="email">Adresse email</label>
+                        <label for="email">Email ou nom d'utilisateur</label>
                         <div class="input-wrapper">
-                            <i class="fas fa-envelope"></i>
-                            <input type="email" class="form-control" id="email" name="email" 
-                                   placeholder="votre.email@hopital.com" required autocomplete="email">
+                            <i class="fas fa-user"></i>
+                            <input type="text" class="form-control" id="email" name="email" 
+                                   placeholder="email ou nom d'utilisateur" required autocomplete="username">
                         </div>
                     </div>
 

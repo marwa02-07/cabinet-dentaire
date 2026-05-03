@@ -147,7 +147,7 @@ $patientRendezVous = $patientRendezVous ?? [];
 <body>
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Médecin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -156,22 +156,22 @@ $patientRendezVous = $patientRendezVous ?? [];
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/medecin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">
                             <i class="fas fa-calendar-alt me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/consultation/select">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select">
                             <i class="fas fa-stethoscope me-1"></i>Consultations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/profile">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile">
                             <i class="fas fa-user-cog me-1"></i>Mon Profil
                         </a>
                     </li>
@@ -181,7 +181,7 @@ $patientRendezVous = $patientRendezVous ?? [];
                         <i class="fas fa-user-md"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -196,7 +196,7 @@ $patientRendezVous = $patientRendezVous ?? [];
                     <h1 class="welcome-title">Dossier patient</h1>
                     <p class="welcome-sub">Informations complètes et historique des rendez-vous du patient.</p>
                 </div>
-                <a href="index.php?route=/medecin/rendez-vous" class="btn btn-outline-light btn-sm">
+                <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous" class="btn btn-outline-light btn-sm">
                     <i class="fas fa-arrow-left me-1"></i>Retour aux rendez-vous
                 </a>
             </div>

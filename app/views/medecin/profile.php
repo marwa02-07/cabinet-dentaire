@@ -304,7 +304,7 @@ $medecin = $medecin ?? [];
 <body>
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/medecin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Médecin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -313,22 +313,22 @@ $medecin = $medecin ?? [];
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/medecin/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/rendez-vous">
                             <i class="fas fa-calendar-alt me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/consultation/select">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/consultation/select">
                             <i class="fas fa-stethoscope me-1"></i>Consultations
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/medecin/profile">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/medecin/profile">
                             <i class="fas fa-user-cog me-1"></i>Mon Profil
                         </a>
                     </li>
@@ -338,7 +338,7 @@ $medecin = $medecin ?? [];
                         <i class="fas fa-user-md"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -353,7 +353,7 @@ $medecin = $medecin ?? [];
                     <h1 class="welcome-title">Mon Profil</h1>
                     <p class="welcome-sub">Consultez et modifiez vos informations personnelles et professionnelles.</p>
                 </div>
-                <a href="index.php?route=/medecin/dashboard" class="btn btn-outline-light btn-sm">
+                <a href="<?php echo BASE_URL; ?>index.php?route=/medecin/dashboard" class="btn btn-outline-light btn-sm">
                     <i class="fas fa-arrow-left me-1"></i>Retour dashboard
                 </a>
             </div>
@@ -472,7 +472,7 @@ $medecin = $medecin ?? [];
                         </button>
                     </div>
                     <div class="p-3 p-md-4">
-                        <form action="index.php?route=/medecin/profile/update" method="POST" id="profileForm">
+                        <form action="<?php echo BASE_URL; ?>index.php?route=/medecin/profile/update" method="POST" id="profileForm">
                             <div class="row gy-3">
                                 <div class="col-md-6">
                                     <label for="nom" class="form-label">Nom <span class="text-danger">*</span></label>
@@ -492,7 +492,15 @@ $medecin = $medecin ?? [];
                                 </div>
                                 <div class="col-md-6">
                                     <label for="specialite" class="form-label">Spécialité</label>
-                                    <input type="text" class="form-control" id="specialite" name="specialite" value="<?php echo htmlspecialchars($medecin['specialite'] ?? ''); ?>" placeholder="Ex: Chirurgie Dentaire">
+                                    <?php $currentSpecialite = ConsultationTypeCatalog::normalize($medecin['specialite'] ?? ''); ?>
+                                    <select class="form-control" id="specialite" name="specialite" required>
+                                        <option value="">Sélectionner...</option>
+                                        <?php foreach (ConsultationTypeCatalog::getTypes() as $typeKey => $typeLabel): ?>
+                                            <option value="<?php echo htmlspecialchars($typeKey); ?>" <?php echo $currentSpecialite === $typeKey ? 'selected' : ''; ?>>
+                                                <?php echo htmlspecialchars($typeLabel); ?>
+                                            </option>
+                                        <?php endforeach; ?>
+                                    </select>
                                 </div>
                                 <div class="col-md-6">
                                     <label for="numero_licence" class="form-label">Numéro de licence</label>

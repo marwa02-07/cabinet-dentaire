@@ -6,12 +6,12 @@
     <title>Dashboard Secrétaire - Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/secretaire-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/secretaire-theme.css" rel="stylesheet">
 </head>
 <body class="secretaire-body">
     <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/secretaire/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Secrétaire
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/secretaire/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/rendezvous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous">
                             <i class="fas fa-calendar-check me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/patients">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/planning">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning">
                             <i class="fas fa-calendar-alt me-1"></i>Planning
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                         <i class="fas fa-user-tie"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -113,14 +113,14 @@
             </div>
             <div class="row g-3">
                 <div class="col-12 col-md-6 col-xl-3">
-                    <a href="index.php?route=/secretaire/rendezvous" class="menu-card">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous" class="menu-card">
                         <div class="menu-ico"><i class="fas fa-calendar-check"></i></div>
                         <p class="menu-title">Rendez-vous</p>
                         <p class="menu-desc">Suivre et mettre à jour les rendez-vous.</p>
                     </a>
                 </div>
                 <div class="col-12 col-md-6 col-xl-3">
-                    <a href="index.php?route=/secretaire/patients" class="menu-card">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients" class="menu-card">
                         <div class="menu-ico"><i class="fas fa-users"></i></div>
                         <p class="menu-title">Patients</p>
                         <p class="menu-desc">Rechercher et gérer les dossiers patients.</p>
@@ -134,7 +134,7 @@
                     </button>
                 </div>
                 <div class="col-12 col-md-6 col-xl-3">
-                    <a href="index.php?route=/secretaire/planning" class="menu-card">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning" class="menu-card">
                         <div class="menu-ico"><i class="fas fa-calendar-alt"></i></div>
                         <p class="menu-title">Planning</p>
                         <p class="menu-desc">Visualiser le planning global du cabinet.</p>
@@ -150,7 +150,7 @@
                         <h2 class="panel-title h5 mb-0">
                             <i class="fas fa-calendar-check me-2 text-info"></i>Rendez-vous du jour
                         </h2>
-                        <a href="index.php?route=/secretaire/rendezvous" class="btn btn-primary-custom btn-sm">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous" class="btn btn-primary-custom btn-sm">
                             Voir tout
                         </a>
                     </div>
@@ -205,7 +205,7 @@
                     </ul>
                     <?php if (empty($todayAppointments)): ?>
                         <div class="mt-3">
-                            <a href="index.php?route=/secretaire/rendezvous/create" class="btn btn-primary-custom">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/create" class="btn btn-primary-custom">
                                 <i class="fas fa-plus me-1"></i>Créer un rendez-vous
                             </a>
                         </div>
@@ -223,28 +223,28 @@
                     </div>
                     <div class="row g-3">
                         <div class="col-12">
-                            <a href="index.php?route=/secretaire/patients/create" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients/create" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-user-plus"></i></div>
                                 <p class="menu-title">Nouveau patient</p>
                                 <p class="menu-desc">Enregistrer un nouveau dossier patient.</p>
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="index.php?route=/secretaire/rendezvous/create" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/create" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-calendar-plus"></i></div>
                                 <p class="menu-title">Nouveau rendez-vous</p>
                                 <p class="menu-desc">Planifier rapidement un créneau de consultation.</p>
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="index.php?route=/secretaire/patients" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-users"></i></div>
                                 <p class="menu-title">Gérer patients</p>
                                 <p class="menu-desc">Consulter et administrer la liste des patients.</p>
                             </a>
                         </div>
                         <div class="col-12">
-                            <a href="index.php?route=/secretaire/planning" class="menu-card">
+                            <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning" class="menu-card">
                                 <div class="menu-ico"><i class="fas fa-calendar-alt"></i></div>
                                 <p class="menu-title">Voir planning</p>
                                 <p class="menu-desc">Suivre les rendez-vous sur la journée et la semaine.</p>

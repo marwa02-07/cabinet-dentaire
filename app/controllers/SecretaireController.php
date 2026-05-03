@@ -412,7 +412,7 @@ class SecretaireController extends Controller
         $dentiste_id = isset($_POST['dentiste_id']) ? (int) $_POST['dentiste_id'] : 0;
         $date = isset($_POST['date']) ? trim($_POST['date']) : '';
         $heure = isset($_POST['heure']) ? trim($_POST['heure']) : '';
-        $type_rendez_vous = $_POST['type_rendez_vous'] ?? 'consultation';
+        $type_rendez_vous = ConsultationTypeCatalog::normalize($_POST['type_rendez_vous'] ?? '');
         $motif = $_POST['motif'] ?? '';
         $allowedDuree = [15, 30, 45, 60];
         $duree_minutes = isset($_POST['duree_minutes']) ? (int) $_POST['duree_minutes'] : 30;
@@ -421,7 +421,7 @@ class SecretaireController extends Controller
         }
 
         // Validation
-        if ($patient_id <= 0 || $dentiste_id <= 0 || $date === '' || $heure === '') {
+        if ($patient_id <= 0 || $dentiste_id <= 0 || $date === '' || $heure === '' || $type_rendez_vous === '') {
             $_SESSION['error'] = 'Veuillez remplir tous les champs obligatoires';
             header('Location: index.php?route=/secretaire/rendezvous/create');
             exit;
@@ -475,20 +475,8 @@ class SecretaireController extends Controller
             exit;
         }
 
-        // Mapping des types vers spécialités
-        $typeToSpecialite = [
-            'consultation' => 'consultation',
-            'nettoyage' => 'consultation',
-            'extraction' => 'extraction',
-            'traitement' => 'traitement',
-            'blanchiment' => 'blanchiment',
-            'radio' => 'radio',
-            'autre' => 'consultation'
-        ];
-        $specialite = $typeToSpecialite[$type_rendez_vous] ?? 'consultation';
-
         // VALIDATION BACKEND: Vérifier que le dentiste correspond à la spécialité
-        if (!$this->medecinModel->verifySpecialite($dentiste_id, $specialite)) {
+        if (!$this->medecinModel->verifySpecialite($dentiste_id, $type_rendez_vous)) {
             $_SESSION['error'] = 'Le dentiste sélectionné ne correspond pas au type de rendez-vous';
             header('Location: index.php?route=/secretaire/rendezvous/create');
             exit;
@@ -560,6 +548,19 @@ class SecretaireController extends Controller
         $patient_id = $_POST['patient_id'] ?? $rdv['patient_id'];
         $dentiste_id = $_POST['dentiste_id'] ?? $rdv['dentiste_id'];
         $date_heure = $_POST['date_heure'] ?? $rdv['date_heure'];
+        $type_rendez_vous = ConsultationTypeCatalog::normalize($_POST['type_rendez_vous'] ?? $rdv['type_rendez_vous']);
+
+        if ($type_rendez_vous === '') {
+            $_SESSION['error'] = 'Type de rendez-vous invalide';
+            header('Location: index.php?route=/secretaire/rendezvous/edit?id=' . $id);
+            exit;
+        }
+
+        if (!$this->medecinModel->verifySpecialite((int) $dentiste_id, $type_rendez_vous)) {
+            $_SESSION['error'] = 'Le dentiste sélectionné ne correspond pas au type de rendez-vous';
+            header('Location: index.php?route=/secretaire/rendezvous/edit?id=' . $id);
+            exit;
+        }
 
         // Vérifier les conflits si la date a changé
         if ($date_heure !== $rdv['date_heure']) {
@@ -583,7 +584,7 @@ class SecretaireController extends Controller
                 'date_heure' => $date_heure,
                 'duree_minutes' => $_POST['duree_minutes'] ?? $rdv['duree_minutes'],
                 'motif' => $_POST['motif'] ?? '',
-                'type_rendez_vous' => $_POST['type_rendez_vous'] ?? $rdv['type_rendez_vous']
+                'type_rendez_vous' => $type_rendez_vous
             ]);
 
             $_SESSION['success'] = 'Rendez-vous mis à jour avec succès';
@@ -822,21 +823,17 @@ class SecretaireController extends Controller
         header('Content-Type: application/json');
         
         try {
-            $type = $_GET['type'] ?? '';
-            
-            // Mapping des types de rendez-vous vers les spécialités
-            $typeToSpecialite = [
-                'consultation' => 'consultation',
-                'nettoyage' => 'consultation',
-                'extraction' => 'extraction',
-                'traitement' => 'traitement',
-                'blanchiment' => 'blanchiment',
-                'radio' => 'radio',
-                'autre' => 'consultation'
-            ];
-            
-            $specialite = $typeToSpecialite[$type] ?? 'consultation';
-            
+            $type = ConsultationTypeCatalog::normalize($_GET['type'] ?? '');
+            $specialite = $type;
+            if ($specialite === '') {
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Type de consultation invalide',
+                    'dentistes' => []
+                ]);
+                exit;
+            }
+
             $dentistes = $this->medecinModel->getBySpecialite($specialite);
             
             echo json_encode([

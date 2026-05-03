@@ -383,7 +383,7 @@
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/admin/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Admin
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -392,22 +392,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/dashboard">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/medecins">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/medecins">
                             <i class="fas fa-user-md me-1"></i>Médecins
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/admin/secretaires">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/admin/secretaires">
                             <i class="fas fa-user-secret me-1"></i>Secrétaires
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/admin/patients">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/admin/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
@@ -418,7 +418,7 @@
                         <?php echo htmlspecialchars($_SESSION['user_prenom'] . ' ' . $_SESSION['user_nom']); ?>
                         <span class="role-badge ms-2">ADMIN</span>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -444,7 +444,7 @@
                             <input type="text" id="searchPatient" class="form-control search"
                                 placeholder="Rechercher par nom, prénom, email ou téléphone..." onkeyup="filterTable()">
                         </div>
-                        <a href="index.php?route=/register-patient" class="btn btn-hero btn-gradient">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/register-patient" class="btn btn-hero btn-gradient">
                             <i class="fas fa-plus me-2"></i>Ajouter un patient
                         </a>
                     </div>
@@ -521,10 +521,10 @@
                                         <td>
                                             <div class="actions-cell">
                                                
-                                                <a href="index.php?route=/admin/patients/edit/<?php echo $patient['id']; ?>" class="btn btn-edit" title="Modifier">
+                                                <a href="<?php echo BASE_URL; ?>index.php?route=/admin/patients/edit/<?php echo $patient['id']; ?>" class="btn btn-edit" title="Modifier">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <form method="POST" action="index.php?route=/admin/patients/delete" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient?');">
+                                                <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/admin/patients/delete" class="d-inline" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce patient?');">
                                                     <input type="hidden" name="patient_id" value="<?php echo $patient['id']; ?>">
                                                     <button type="submit" class="btn btn-delete" title="Supprimer">
                                                         <i class="fas fa-trash"></i>

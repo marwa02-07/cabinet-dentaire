@@ -1,0 +1,657 @@
+/* Espace patient — thème violet / magenta (aligné sur dashboard) */
+:root {
+    --bg: #f7f2ff;
+    --surface: #ffffff;
+    --surface-alt: #fbf8ff;
+    --text: #28174a;
+    --muted: #6f6290;
+    --line: #e8ddff;
+    --primary: #7c3aed;
+    --primary-dark: #5b21b6;
+    --pink: #c026d3;
+    --warn: #d97706;
+    --ok: #15803d;
+    --shadow: 0 16px 36px rgba(124, 58, 237, 0.16);
+    --shadow-sm: 0 8px 18px rgba(124, 58, 237, 0.12);
+    --accent-gradient: linear-gradient(135deg, var(--primary), var(--pink));
+}
+
+body.patient-body {
+    margin: 0;
+    color: var(--text);
+    font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+    background:
+    radial-gradient(1200px 500px at -10% -5%, rgba(124, 58, 237, 0.2), transparent 60%),
+    radial-gradient(1000px 420px at 100% 0%, rgba(192, 38, 211, 0.14), transparent 55%),
+    var(--bg);
+    padding-top: 84px;
+}
+
+html,
+body {
+    min-height: 100%;
+}
+
+body.patient-body {
+    min-height: 100vh;
+    background:
+        radial-gradient(1200px 500px at -10% -5%, rgba(124, 58, 237, 0.2), transparent 60%),
+        radial-gradient(1000px 420px at 100% 0%, rgba(192, 38, 211, 0.14), transparent 55%),
+        linear-gradient(180deg, #f7f2ff 0%, #efe7ff 100%);
+    
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.topbar {
+    background: linear-gradient(90deg, #5b21b6 0%, #7c3aed 50%, #c026d3 100%);
+    box-shadow: 0 8px 24px rgba(91, 33, 182, 0.3);
+}
+
+.topbar .navbar-brand {
+    color: #fff !important;
+    font-weight: 800;
+    letter-spacing: 0.2px;
+}
+
+.topbar .nav-link {
+    color: rgba(255, 255, 255, 0.92) !important;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 8px 12px !important;
+    margin-left: 6px;
+}
+
+.topbar .nav-link:hover,
+.topbar .nav-link:focus {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff !important;
+}
+
+.topbar .navbar-toggler {
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    padding: 0.35rem 0.55rem;
+}
+
+.topbar .navbar-toggler:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 255, 255, 0.25);
+}
+
+.topbar .navbar-toggler-icon {
+    filter: brightness(0) invert(1);
+}
+
+.patient-pill {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #fff;
+    background: rgba(255, 255, 255, 0.16);
+    border: 1px solid rgba(255, 255, 255, 0.28);
+    border-radius: 999px;
+    padding: 7px 12px;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 8px;
+}
+
+.dashboard {
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 14px 22px;
+}
+
+.welcome-banner {
+    background: linear-gradient(130deg, rgba(124, 58, 237, 0.95), rgba(192, 38, 211, 0.9)), #7c3aed;
+    color: #fff;
+    border-radius: 22px;
+    padding: 22px;
+    box-shadow: var(--shadow);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 18px;
+}
+
+.welcome-banner::after {
+    content: "";
+    position: absolute;
+    right: -80px;
+    top: -80px;
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.welcome-title {
+    margin: 0;
+    font-size: clamp(1.3rem, 2.6vw, 1.85rem);
+    font-weight: 900;
+    letter-spacing: -0.3px;
+}
+
+.welcome-sub {
+    margin: 0.45rem 0 0;
+    opacity: 0.94;
+    max-width: 780px;
+}
+
+.clock-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 999px;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    background: rgba(15, 23, 42, 0.16);
+    padding: 8px 12px;
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.panel {
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+}
+
+.panel-title {
+    margin: 0;
+    font-weight: 900;
+    letter-spacing: -0.2px;
+    color: #3b206d;
+}
+
+.kpi {
+    padding: 14px;
+    border-radius: 14px;
+    border: 1px solid var(--line);
+    background: linear-gradient(180deg, #fff, var(--surface-alt));
+    height: 100%;
+}
+
+.kpi .label {
+    color: var(--muted);
+    font-weight: 700;
+    font-size: 13px;
+}
+
+.kpi .value {
+    font-size: 30px;
+    font-weight: 900;
+    line-height: 1.1;
+    color: #441f84;
+}
+
+.kpi-icon {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    background: linear-gradient(135deg, var(--primary), var(--pink));
+}
+
+.rdv-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 10px;
+}
+
+.rdv-row {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    background: #fff;
+    padding: 12px;
+    border-left: 4px solid var(--primary);
+}
+
+.rdv-doctor {
+    font-weight: 800;
+    color: #3e236f;
+}
+
+.rdv-date {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.rdv-type {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 600;
+}
+
+.status-pill {
+    border-radius: 999px;
+    padding: 6px 10px;
+    font-size: 12px;
+    font-weight: 800;
+}
+
+.status-planifie {
+    background: #fff7ed;
+    color: var(--warn);
+}
+
+.status-confirme {
+    background: #ecfdf5;
+    color: var(--ok);
+}
+
+.status-complete {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.status-annule {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.status-absent {
+    background: #f3f4f6;
+    color: #374151;
+}
+
+/* Statuts avec accents (base de données) */
+.status-planifié,
+.status-badge.status-planifié {
+    background: #fff7ed;
+    color: var(--warn);
+}
+
+.status-confirmé,
+.status-badge.status-confirmé {
+    background: #ecfdf5;
+    color: var(--ok);
+}
+
+.status-complété,
+.status-badge.status-complété {
+    background: #ede9fe;
+    color: #5b21b6;
+}
+
+.status-annulé,
+.status-badge.status-annulé {
+    background: #ffe4e6;
+    color: #be123c;
+}
+
+.menu-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 14px;
+    background: linear-gradient(180deg, #fff, #fbf8ff);
+    transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        border-color 0.16s ease;
+    height: 100%;
+}
+
+.menu-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-sm);
+    border-color: #d5c2ff;
+    color: inherit;
+}
+
+.menu-ico {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
+}
+
+.menu-title {
+    margin: 0;
+    font-weight: 800;
+    color: #4a2a84;
+}
+
+.menu-desc {
+    margin: 0.35rem 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.btn-primary-custom {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    padding: 8px 14px;
+    font-weight: 700;
+}
+
+.btn-primary-custom:hover {
+    color: #fff;
+}
+
+.profile-modal .modal-header {
+    background: linear-gradient(135deg, var(--primary), var(--pink));
+    color: white;
+}
+
+.profile-modal .modal-header .btn-close {
+    filter: invert(1);
+}
+
+.profile-detail {
+    padding: 15px 0;
+    border-bottom: 1px solid #e9ecef;
+}
+
+.profile-detail:last-child {
+    border-bottom: none;
+}
+
+.profile-detail label {
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.profile-detail span {
+    color: #2c3e50;
+    font-size: 15px;
+}
+
+/* Bootstrap primary → violet patient */
+.patient-body .text-primary {
+    color: var(--primary) !important;
+}
+
+.patient-body .btn-submit,
+.patient-body .btn-retour {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border: none;
+    color: #fff;
+    border-radius: 10px;
+    padding: 10px 22px;
+    font-weight: 700;
+}
+
+.patient-body .btn-submit:hover,
+.patient-body .btn-retour:hover {
+    color: #fff;
+    box-shadow: var(--shadow-sm);
+}
+
+.patient-body .btn-submit {
+    padding: 12px 24px;
+    width: 100%;
+}
+
+/* Formulaires sous-pages */
+.patient-body .patient-form .form-label {
+    color: var(--text);
+    font-weight: 700;
+}
+
+.patient-body .patient-form .form-control:focus,
+.patient-body .patient-form .form-select:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 0.2rem rgba(124, 58, 237, 0.2);
+}
+
+/* Profil — étiquettes */
+.patient-body .info-label {
+    color: var(--primary);
+    font-weight: 700;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.patient-body .info-value {
+    color: var(--text);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.patient-body .badge.bg-primary {
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark)) !important;
+}
+
+/* Mes rendez-vous — cartes */
+.patient-rdv-card {
+    background: var(--surface);
+    border-radius: 16px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid var(--line);
+    overflow: hidden;
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.patient-rdv-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.patient-rdv-card-header {
+    background: var(--accent-gradient);
+    padding: 20px 22px;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.patient-rdv-card-header .dentiste-info h5 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 800;
+}
+
+.patient-rdv-card-header .dentiste-info p {
+    margin: 6px 0 0;
+    font-size: 13px;
+    opacity: 0.92;
+    font-weight: 600;
+}
+
+.patient-rdv-card-header .dentiste-icon {
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.22);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.patient-rdv-card-body {
+    padding: 22px;
+    flex: 1;
+}
+
+.patient-rdv-datetime {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid var(--line);
+}
+
+.patient-rdv-date,
+.patient-rdv-time {
+    flex: 1;
+    text-align: center;
+    padding: 14px;
+    background: var(--surface-alt);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+}
+
+.patient-rdv-date i,
+.patient-rdv-time i {
+    font-size: 18px;
+    color: var(--primary);
+    margin-bottom: 8px;
+    display: block;
+}
+
+.patient-rdv-date .label,
+.patient-rdv-time .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+.patient-rdv-date .value,
+.patient-rdv-time .value {
+    font-size: 16px;
+    color: var(--text);
+    font-weight: 800;
+    margin-top: 6px;
+}
+
+.patient-rdv-detail {
+    margin-bottom: 14px;
+}
+
+.patient-rdv-detail:last-of-type {
+    margin-bottom: 0;
+}
+
+.patient-rdv-detail .detail-label {
+    font-size: 12px;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.patient-rdv-detail .detail-value {
+    font-size: 14px;
+    color: var(--text);
+    padding-left: 4px;
+    font-weight: 600;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    display: inline-block;
+    text-transform: capitalize;
+}
+
+/* États vides */
+.patient-empty-state {
+    text-align: center;
+    padding: 56px 22px;
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+}
+
+.patient-empty-state i {
+    font-size: 64px;
+    color: #d4c4f5;
+    margin-bottom: 18px;
+}
+
+.patient-empty-state h4 {
+    color: #3b206d;
+    font-weight: 800;
+    margin-bottom: 10px;
+}
+
+.patient-empty-state p {
+    color: var(--muted);
+    margin-bottom: 22px;
+    font-weight: 600;
+}
+
+/* Consultations / résultats */
+.patient-consult-card {
+    background: var(--surface);
+    border-radius: 16px;
+    border: 1px solid var(--line);
+    box-shadow: var(--shadow-sm);
+    padding: 24px;
+    margin-bottom: 20px;
+    transition:
+        box-shadow 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.patient-consult-card:hover {
+    box-shadow: var(--shadow-sm);
+    border-color: #d5c2ff;
+}
+
+.patient-diagnostic-badge {
+    background: #ede9fe;
+    color: var(--primary-dark);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 13px;
+    font-weight: 700;
+    display: inline-block;
+}
+
+.patient-prix-badge {
+    background: #ecfdf5;
+    color: var(--ok);
+    padding: 8px 14px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.patient-page-header-band .badge.bg-success {
+    background: linear-gradient(135deg, #15803d, #16a34a) !important;
+    border-radius: 12px;
+    font-weight: 700;
+}
+
+@media (max-width: 768px) {
+    .patient-rdv-datetime {
+        flex-direction: column;
+    }
+
+    .patient-rdv-card-header {
+        flex-direction: column-reverse;
+        text-align: center;
+    }
+}

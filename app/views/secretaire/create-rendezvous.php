@@ -6,12 +6,12 @@
     <title>Nouveau Rendez-vous - Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/secretaire-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/secretaire-theme.css" rel="stylesheet">
 </head>
 <body class="secretaire-body">
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/secretaire/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Secrétaire
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/dashboard">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/secretaire/rendezvous">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous">
                             <i class="fas fa-calendar-check me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/patients">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/planning">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning">
                             <i class="fas fa-calendar-alt me-1"></i>Planning
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                         <i class="fas fa-user-tie"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -67,7 +67,7 @@
         <?php endif; ?>
 
         <div class="panel p-3 p-md-4">
-            <form method="POST" action="index.php?route=/secretaire/rendezvous/store" class="sec-form" id="secRdvForm">
+            <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/store" class="sec-form" id="secRdvForm">
                 <div class="row">
                     <div class="col-md-6 mb-3">
                         <label class="form-label">Patient *</label>
@@ -97,13 +97,9 @@
                         <label class="form-label">Type de rendez-vous *</label>
                         <select name="type_rendez_vous" id="type_rendez_vous" class="form-select" required>
                             <option value="">Sélectionner un type</option>
-                            <option value="consultation">Consultation</option>
-                            <option value="nettoyage">Nettoyage</option>
-                            <option value="extraction">Extraction</option>
-                            <option value="traitement">Traitement</option>
-                            <option value="blanchiment">Blanchiment</option>
-                            <option value="radio">Radio</option>
-                            <option value="autre">Autre</option>
+                            <?php foreach (ConsultationTypeCatalog::getTypes() as $typeKey => $typeLabel): ?>
+                                <option value="<?php echo htmlspecialchars($typeKey); ?>"><?php echo htmlspecialchars($typeLabel); ?></option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
                     <div class="col-md-6 mb-3">
@@ -111,11 +107,9 @@
                         <select name="dentiste_id" id="dentiste_id" class="form-select" required>
                             <option value="">Sélectionner un dentiste</option>
                             <?php foreach ($dentistes as $d): ?>
-                                <?php
-                                $specialiteLower = strtolower($d['specialite'] ?? 'chirurgie dentaire');
-                                ?>
-                                <option value="<?php echo (int) $d['id']; ?>" data-specialite="<?php echo htmlspecialchars($specialiteLower); ?>">
-                                    Dr. <?php echo htmlspecialchars(($d['prenom'] ?? '') . ' ' . ($d['nom'] ?? '')); ?> - <?php echo htmlspecialchars($d['specialite'] ?? ''); ?>
+                                <?php $specialiteType = ConsultationTypeCatalog::normalize($d['specialite'] ?? ''); ?>
+                                <option value="<?php echo (int) $d['id']; ?>" data-specialite-type="<?php echo htmlspecialchars($specialiteType); ?>">
+                                    Dr. <?php echo htmlspecialchars(($d['prenom'] ?? '') . ' ' . ($d['nom'] ?? '')); ?> - <?php echo htmlspecialchars(ConsultationTypeCatalog::getLabel($d['specialite'] ?? '') ?: 'Non défini'); ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
@@ -144,7 +138,7 @@
                     </div>
                 </div>
                 <div class="text-end">
-                    <a href="index.php?route=/secretaire/rendezvous" class="btn btn-outline-secondary">Annuler</a>
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous" class="btn btn-outline-secondary">Annuler</a>
                     <button type="submit" class="btn btn-primary-custom ms-2">
                         <i class="fas fa-save me-1"></i>Enregistrer
                     </button>
@@ -164,7 +158,7 @@
             const helpText = document.getElementById('dentisteHelpText');
             const slotHelpText = document.getElementById('slotHelpText');
 
-            const dentistOptions = Array.from(dentistSelect.querySelectorAll('option[data-specialite]'));
+            const dentistOptions = Array.from(dentistSelect.querySelectorAll('option[data-specialite-type]'));
 
             const API_DATES = 'index.php?route=/secretaire/rendezvous/available-dates';
             const API_SLOTS = 'index.php?route=/secretaire/rendezvous/available-slots';
@@ -175,36 +169,16 @@
                 return p[2] + '/' + p[1] + '/' + p[0];
             }
 
-            const specialtyMap = {
-                consultation: ['consultation', 'dentaire', 'odontologie', 'généraliste', 'generaliste', 'général', 'general'],
-                nettoyage: ['nettoyage', 'hygiène', 'hygiene', 'prophylaxie', 'parodontie', 'détartrage', 'detartrage'],
-                extraction: ['extraction', 'chirurgie', 'orale', 'chirurgical', 'implantologie'],
-                traitement: ['traitement', 'endodontie', 'restauration', 'obturation', 'prothèse', 'prothese', 'odontologie', 'parodontie'],
-                blanchiment: ['blanchiment', 'esthétique', 'esthetique', 'cosmétique', 'cosmetique', 'esthetique'],
-                radio: ['radio', 'imagerie', 'radiologie', 'scanner', 'panoramique', 'cone beam'],
-                autre: ['consultation', 'dentaire', 'odontologie', 'généraliste', 'generaliste', 'général', 'general']
-            };
-
             function filterDentists() {
                 const type = typeSelect.value || '';
-                const keywords = specialtyMap[type] || [];
                 const normalizedType = type.trim().toLowerCase();
 
                 dentistSelect.innerHTML = '<option value="">Sélectionner un dentiste</option>';
                 let count = 0;
 
                 dentistOptions.forEach(option => {
-                    const specialite = (option.dataset.specialite || '').toLowerCase();
-                    let keep = false;
-
-                    if (normalizedType === '') {
-                        keep = true; // Show all when no type selected
-                    } else {
-                        keep = keywords.some(keyword => specialite.includes(keyword.toLowerCase()));
-                        if (!keep && (normalizedType === 'consultation' || normalizedType === 'autre') && !specialite.trim()) {
-                            keep = true;
-                        }
-                    }
+                    const specialiteType = (option.dataset.specialiteType || '').toLowerCase();
+                    const keep = normalizedType === '' ? true : specialiteType === normalizedType;
 
                     if (keep) {
                         dentistSelect.appendChild(option.cloneNode(true));
@@ -223,7 +197,7 @@
                 }
 
                 helpText.textContent = normalizedType
-                    ? 'Dentistes filtrés pour le type : ' + normalizedType
+                    ? 'Dentistes filtrés pour le type sélectionné.'
                     : 'Choisissez un type pour filtrer les dentistes adaptés.';
 
                 resetDateAndTime();

@@ -252,7 +252,7 @@
 
         <!-- Barre admin -->
         <div class="admin-topbar">
-            <a href="index.php?route=/admin/medecins" class="back-link">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/admin/medecins" class="back-link">
                 <i class="fas fa-arrow-left"></i> Retour à la liste
             </a>
             <div>
@@ -283,7 +283,7 @@
         <?php endif; ?>
 
         <!-- Formulaire -->
-        <form method="POST" action="index.php?route=/register-medecin" novalidate>
+        <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/register-medecin" novalidate>
 
             <div class="section-label">Informations personnelles</div>
             <div class="grid-2">
@@ -335,11 +335,11 @@
                         <select name="specialite" class="fc" required>
                             <option value="">Sélectionner...</option>
                             <?php
-                            $specs = ['Médecin Généraliste','Orthodontiste','Chirurgien dentiste','Parodontiste','Endodontiste','Implantologue'];
-                            foreach ($specs as $s):
-                                $sel = (isset($_POST['specialite']) && $_POST['specialite'] === $s) ? 'selected' : '';
+                            $postedSpecialite = ConsultationTypeCatalog::normalize($_POST['specialite'] ?? '');
+                            foreach (ConsultationTypeCatalog::getTypes() as $typeKey => $typeLabel):
+                                $sel = ($postedSpecialite === $typeKey) ? 'selected' : '';
                             ?>
-                            <option value="<?php echo $s; ?>" <?php echo $sel; ?>><?php echo $s; ?></option>
+                            <option value="<?php echo htmlspecialchars($typeKey); ?>" <?php echo $sel; ?>><?php echo htmlspecialchars($typeLabel); ?></option>
                             <?php endforeach; ?>
                         </select>
                     </div>

@@ -522,7 +522,7 @@
 
     <main class="panel-right">
         <div class="topbar">
-            <a href="index.php?route=/login" class="back-link">
+            <a href="<?php echo BASE_URL; ?>index.php?route=/login" class="back-link">
                 <i class="fas fa-arrow-left"></i> Retour à la connexion
             </a>
         </div>
@@ -546,7 +546,7 @@
             </div>
         <?php endif; ?>
 
-        <form method="POST" action="index.php?route=/register" novalidate>
+        <form method="POST" action="<?php echo BASE_URL; ?>index.php?route=/register" novalidate>
             <div class="section-label">Informations personnelles</div>
             <div class="grid-2">
                 <div class="field">
@@ -636,7 +636,7 @@
         </form>
 
         <div class="login-link">
-            Déjà un compte ? <a href="index.php?route=/login">Se connecter</a>
+            Déjà un compte ? <a href="<?php echo BASE_URL; ?>index.php?route=/login">Se connecter</a>
         </div>
     </main>
 </div>

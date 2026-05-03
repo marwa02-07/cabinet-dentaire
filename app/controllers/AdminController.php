@@ -357,10 +357,16 @@ class AdminController extends Controller
             $prenom = $_POST['prenom'] ?? '';
             $email = $_POST['email'] ?? '';
             $telephone = $_POST['telephone'] ?? '';
-            $specialite = $_POST['specialite'] ?? '';
+            $specialite = ConsultationTypeCatalog::normalize($_POST['specialite'] ?? '');
 
             if (!$id) {
                 $_SESSION['error'] = 'ID médecin invalide';
+                header('Location: index.php?route=/admin/medecins');
+                exit();
+            }
+
+            if (!ConsultationTypeCatalog::isValid($specialite)) {
+                $_SESSION['error'] = 'Spécialité invalide. Utilisez une valeur de la liste autorisée.';
                 header('Location: index.php?route=/admin/medecins');
                 exit();
             }

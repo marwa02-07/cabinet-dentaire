@@ -6,12 +6,12 @@
     <title>Planning - Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/secretaire-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/secretaire-theme.css" rel="stylesheet">
 </head>
 <body class="secretaire-body">
 <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/secretaire/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Secrétaire
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/secretaire/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/rendezvous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous">
                             <i class="fas fa-calendar-check me-1"></i>Rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/patients">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/patients">
                             <i class="fas fa-users me-1"></i>Patients
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/secretaire/planning">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning">
                             <i class="fas fa-calendar-alt me-1"></i>Planning
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                         <i class="fas fa-user-tie"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -65,7 +65,7 @@
             <div class="row align-items-center">
                 <div class="col-md-3">
                     <?php $prevDay = date('Y-m-d', strtotime($dateFilter . ' -1 day')); ?>
-                    <a href="index.php?route=/secretaire/planning&date=<?php echo $prevDay; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo $prevDay; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn">
                         <i class="fas fa-chevron-left"></i> Précédent
                     </a>
                 </div>
@@ -83,13 +83,13 @@
                 </div>
                 <div class="col-md-3">
                     <?php $nextDay = date('Y-m-d', strtotime($dateFilter . ' +1 day')); ?>
-                    <a href="index.php?route=/secretaire/planning&date=<?php echo $nextDay; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn" style="margin-left: auto;">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo $nextDay; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn" style="margin-left: auto;">
                         Suivant <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>
             </div>
             <div class="text-center mt-3">
-                <a href="index.php?route=/secretaire/planning&date=<?php echo date('Y-m-d'); ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn today">
+                <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo date('Y-m-d'); ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="nav-btn today">
                     <i class="fas fa-calendar-day"></i> Aujourd'hui
                 </a>
             </div>
@@ -137,7 +137,7 @@
                         <i class="fas fa-calendar-times"></i>
                         <h4>Aucun rendez-vous</h4>
                         <p>Aucun rendez-vous prévu pour cette date.</p>
-                        <a href="index.php?route=/secretaire/rendezvous/create" class="btn-create-rdv">
+                        <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/create" class="btn-create-rdv">
                             <i class="fas fa-plus"></i> Créer un rendez-vous
                         </a>
                     </div>
@@ -183,7 +183,7 @@
                                         <?php echo ucfirst($rdv['statut'] ?? 'planifié'); ?>
                                     </span>
                                     <div class="appt-actions">
-                                        <a href="index.php?route=/secretaire/rendezvous/edit&id=<?php echo $rdv['id']; ?>" class="btn btn-primary-custom btn-sm text-white border-0">
+                                        <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/rendezvous/edit&id=<?php echo $rdv['id']; ?>" class="btn btn-primary-custom btn-sm text-white border-0">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                     </div>
@@ -201,13 +201,13 @@
                 <div class="d-flex justify-content-between flex-wrap gap-2">
                     <?php $prevWeek = date('Y-m-d', strtotime($dateFilter . ' -7 day')); ?>
                     <?php $nextWeek = date('Y-m-d', strtotime($dateFilter . ' +7 day')); ?>
-                    <a href="index.php?route=/secretaire/planning&date=<?php echo $prevWeek; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-outline-secondary">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo $prevWeek; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-outline-secondary">
                         <i class="fas fa-chevron-left"></i> Semaine précédente
                     </a>
-                    <a href="index.php?route=/secretaire/planning&date=<?php echo date('Y-m-d'); ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-primary-custom border-0">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo date('Y-m-d'); ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-primary-custom border-0">
                         <i class="fas fa-calendar-day"></i> Aujourd'hui
                     </a>
-                    <a href="index.php?route=/secretaire/planning&date=<?php echo $nextWeek; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-outline-secondary">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/secretaire/planning&date=<?php echo $nextWeek; ?><?php echo $dentisteFilter ? '&dentiste=' . $dentisteFilter : ''; ?>" class="btn btn-outline-secondary">
                         Semaine suivante <i class="fas fa-chevron-right"></i>
                     </a>
                 </div>

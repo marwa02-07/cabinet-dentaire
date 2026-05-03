@@ -6,12 +6,12 @@
     <title>Mes Consultations - Cabinet Dentaire</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="css/patient-theme.css" rel="stylesheet">
+    <link href="<?php echo BASE_URL; ?>css/patient-theme.css" rel="stylesheet">
 </head>
 <body class="patient-body">
     <nav class="navbar navbar-expand-lg topbar fixed-top">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.php?route=/patient/dashboard">
+            <a class="navbar-brand" href="<?php echo BASE_URL; ?>index.php?route=/patient/dashboard">
                 <i class="fas fa-tooth me-2"></i>Cabinet Dentaire - Patient
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
@@ -20,22 +20,22 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/patient/dashboard">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/patient/dashboard">
                             <i class="fas fa-tachometer-alt me-1"></i>Dashboard
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/patient/rendez-vous/create">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/patient/rendez-vous/create">
                             <i class="fas fa-calendar-plus me-1"></i>Nouveau rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?route=/patient/rendez-vous">
+                        <a class="nav-link" href="<?php echo BASE_URL; ?>index.php?route=/patient/rendez-vous">
                             <i class="fas fa-calendar-check me-1"></i>Mes rendez-vous
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link active" href="index.php?route=/patient/consultations">
+                        <a class="nav-link active" href="<?php echo BASE_URL; ?>index.php?route=/patient/consultations">
                             <i class="fas fa-file-medical-alt me-1"></i>Consultations
                         </a>
                     </li>
@@ -45,7 +45,7 @@
                         <i class="fas fa-user"></i>
                         <?php echo htmlspecialchars(($user['prenom'] ?? '') . ' ' . ($user['nom'] ?? '')); ?>
                     </div>
-                    <a href="index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
+                    <a href="<?php echo BASE_URL; ?>index.php?route=/logout" class="btn btn-outline-light btn-sm ms-3">
                         <i class="fas fa-sign-out-alt me-1"></i>Déconnexion
                     </a>
                 </div>
@@ -64,7 +64,7 @@
             </div>
         </section>
 
-        <a href="index.php?route=/patient/dashboard" class="btn btn-retour mb-4">
+        <a href="<?php echo BASE_URL; ?>index.php?route=/patient/dashboard" class="btn btn-retour mb-4">
             <i class="fas fa-arrow-left me-2"></i>Retour au tableau de bord
         </a>
 
@@ -127,6 +127,12 @@
                                     <p class="mb-0 text-muted small"><i class="fas fa-sticky-note me-1"></i><?php echo htmlspecialchars($consultation['notes']); ?></p>
                                 </div>
                             <?php endif; ?>
+
+                            <div class="mt-3">
+                                <a href="<?php echo BASE_URL; ?>index.php?route=/patient/consultation/print&id=<?php echo (int)$consultation['id']; ?>" class="btn btn-sm btn-outline-primary">
+                                    <i class="fas fa-print me-1"></i>Imprimer la consultation
+                                </a>
+                            </div>
 
                             <?php if (!empty($consultation['ordonnance'])): ?>
                                 <div class="mt-4 pt-3 border-top">

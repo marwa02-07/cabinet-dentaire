@@ -128,6 +128,64 @@ class PatientController extends Controller
     }
     
     /**
+     * Affiche une consultation patient pour impression
+     */
+    public function printConsultation()
+    {
+        Auth::role('patient');
+        $user = Auth::user();
+
+        $patientModel = new Patient();
+        $patient = $patientModel->findByUserId($user['id']);
+        if (!$patient) {
+            die("✗ Erreur : profil patient introuvable.");
+        }
+
+        $consultation_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+        if (!$consultation_id) {
+            die("✗ Erreur : consultation invalide.");
+        }
+
+        $db = new Database();
+        $pdo = $db->getPdo();
+
+        $consultationModel = new Consultation();
+        $consultationModel->setPdo($pdo);
+        $consultation = $consultationModel->getById($consultation_id);
+
+        if (!$consultation || $consultation['patient_id'] !== $patient['id']) {
+            die("✗ Erreur : consultation introuvable ou accès refusé.");
+        }
+
+        $rendezVousModel = new RendezVous();
+        $rendezVousModel->setPdo($pdo);
+        $rendezVous = $rendezVousModel->getById($consultation['rendez_vous_id']);
+
+        $medecinModel = new Medecin();
+        $medecinModel->setPdo($pdo);
+        $medecin = $medecinModel->getById($consultation['dentiste_id']);
+
+        $ordonnanceModel = new Ordonnance();
+        $ordonnanceMedModel = new OrdonnanceMedicaments();
+        $ordonnanceModel->setPdo($pdo);
+        $ordonnanceMedModel->setPdo($pdo);
+
+        $ordonnance = $ordonnanceModel->findByConsultationId($consultation_id);
+        if ($ordonnance) {
+            $ordonnance['medicaments'] = $ordonnanceMedModel->getByOrdonnanceId($ordonnance['id']);
+        }
+
+        $this->view('patient.consultation_print', [
+            'user' => $user,
+            'patient' => $patient,
+            'consultation' => $consultation,
+            'rendezVous' => $rendezVous,
+            'medecin' => $medecin,
+            'ordonnance' => $ordonnance
+        ]);
+    }
+    
+    /**
      * Affiche le profil du patient
      */
     public function profile()
@@ -168,7 +226,7 @@ class PatientController extends Controller
         $dentiste_id = isset($_POST['dentiste_id']) ? (int)$_POST['dentiste_id'] : 0;
         $date = isset($_POST['date']) ? trim($_POST['date']) : '';
         $heure = isset($_POST['heure']) ? trim($_POST['heure']) : '';
-        $type_rendez_vous = isset($_POST['type_rendez_vous']) ? trim($_POST['type_rendez_vous']) : '';
+        $type_rendez_vous = ConsultationTypeCatalog::normalize($_POST['type_rendez_vous'] ?? '');
         $motif = isset($_POST['motif']) ? trim($_POST['motif']) : '';
         $allowedDuree = [30, 45, 60];
         $duree_minutes = isset($_POST['duree_minutes']) ? (int) $_POST['duree_minutes'] : 30;
@@ -179,6 +237,12 @@ class PatientController extends Controller
         // Validation
         if (empty($dentiste_id) || empty($date) || empty($heure) || empty($type_rendez_vous) || empty($motif)) {
             $_SESSION['error'] = 'Veuillez remplir tous les champs';
+            header('Location: index.php?route=/patient/rendez-vous/create');
+            exit();
+        }
+
+        if (!ConsultationTypeCatalog::isValid($type_rendez_vous)) {
+            $_SESSION['error'] = 'Type de consultation invalide.';
             header('Location: index.php?route=/patient/rendez-vous/create');
             exit();
         }
@@ -287,41 +351,7 @@ class PatientController extends Controller
      */
     private function dentisteMatchesType($dentiste, $type_rendez_vous)
     {
-        $specialite = strtolower(trim($dentiste['specialite'] ?? ''));
-        $type = strtolower(trim($type_rendez_vous));
-
-        if ($type === 'consultation' || $type === 'autre' || $specialite === '') {
-            return true;
-        }
-
-        $keywords = [];
-        switch ($type) {
-            case 'nettoyage':
-                $keywords = ['nettoyage', 'hygiene', 'hygiène', 'prophylaxie'];
-                break;
-            case 'extraction':
-                $keywords = ['extraction', 'chirurgie', 'orale'];
-                break;
-            case 'traitement':
-                $keywords = ['traitement', 'endodontie', 'restauration'];
-                break;
-            case 'blanchiment':
-                $keywords = ['blanchiment', 'esthétique', 'esthetique', 'cosmétique', 'cosmetique'];
-                break;
-            case 'radio':
-                $keywords = ['radio', 'imagerie', 'radiologie'];
-                break;
-            default:
-                return true;
-        }
-
-        foreach ($keywords as $keyword) {
-            if (strpos($specialite, $keyword) !== false) {
-                return true;
-            }
-        }
-
-        return false;
+        return ConsultationTypeCatalog::matches($dentiste['specialite'] ?? '', $type_rendez_vous);
     }
 
     /**
