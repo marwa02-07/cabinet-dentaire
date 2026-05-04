@@ -1,91 +1,88 @@
-# 🦷 Cabinet Dentaire - Système de Gestion
+# 🏥 Cabinet Dentaire - Application Web MVC
 
-Bienvenue dans l'application web **Cabinet Dentaire**, un système complet de gestion pour cabinets dentaires développé en PHP avec une architecture MVC. Cette plateforme permet une gestion efficace des rendez-vous, patients, médecins et secrétaires.
+Application web complète de gestion d’un cabinet dentaire développée en **PHP (architecture MVC)** avec une interface moderne, responsive et adaptée à plusieurs rôles.
 
-## 🚀 Fonctionnalités Principales
+---
 
-### 👨‍💼 Administrateur
-- **Gestion des utilisateurs** : Ajout, modification et suppression des médecins et secrétaires.
-- **Gestion des patients** : Vue d'ensemble et administration des dossiers patients.
-- **Tableau de bord** : Statistiques globales et suivi des activités.
+## 📌 1. Présentation du projet
 
-### 👨‍⚕️ Médecin / Dentiste
-- **Dashboard personnalisé** : Aperçu des rendez-vous hebdomadaires et statistiques.
-- **Gestion des rendez-vous** : Confirmation, annulation et marquage des absences.
-- **Consultations et ordonnances** : Création et gestion des consultations médicales et prescriptions.
-- **Accès aux dossiers** : Consultation des informations patients.
+Cette application permet de centraliser et simplifier la gestion d’un cabinet dentaire :
 
-### 🗂️ Secrétaire
-- **Gestion des rendez-vous** : Planification, modification et suivi complet.
-- **Administration des patients** : Enregistrement, mise à jour et gestion des profils.
-- **Planning** : Vue journalière et hebdomadaire des rendez-vous.
-- **Mises à jour de statut** : Changement des états des rendez-vous en temps réel.
+* Gestion des patients
+* Gestion des rendez-vous
+* Gestion des consultations
+* Interfaces adaptées selon le rôle utilisateur
+
+👥 **Rôles disponibles :**
+
+* 👑 Administrateur
+* 🧑‍⚕️ Dentiste (Médecin)
+* 🧑‍💼 Secrétaire
+* 🧑‍🦱 Patient
+
+---
+
+## 🌐 2. Accès en ligne
+
+🔗 **Lien du projet :**
+👉 https://cabinet-dentaire.infinityfree.me/
+
+---
+
+## 🔐 3. Comptes de test
+
+Utilisez les comptes suivants pour tester l’application :
+
+### 👑 Administrateur
+
+* Email : `ensiasd`
+* Mot de passe : `ENSIASD2026`
+
+### 🧑‍⚕️ Dentiste
+
+* Email : `dentiste@cabinet.com`
+* Mot de passe : `123456`
+
+### 🧑‍💼 Secrétaire
+
+* Email : `secretaire@cabinet.com`
+* Mot de passe : `123456`
 
 ### 🧑‍🦱 Patient
-- **Prise de rendez-vous** : Réservation en ligne avec sélection de créneaux disponibles.
-- **Historique médical** : Accès aux consultations passées et résultats.
-- **Gestion du profil** : Mise à jour des informations personnelles.
 
-## 🛠️ Technologies Utilisées
+* Email : `patient@cabinet.com`
+* Mot de passe : `123456`
 
-- **Backend** : PHP 8+ avec architecture MVC personnalisée.
-- **Base de données** : MySQL (connexion via PDO pour la sécurité).
-- **Frontend** : HTML5, CSS3, Bootstrap 5 pour une interface responsive, et Font Awesome pour les icônes.
-- **Serveur local** : XAMPP (Apache, MySQL, PHP).
-- **Sécurité** : Sessions PHP avec gestion de rôles indépendants.
+⚠️ *Ces comptes sont destinés uniquement à des fins de démonstration.*
 
-## 📦 Installation et Configuration
+---
 
-### Prérequis
-- **XAMPP** installé et configuré (avec Apache et MySQL activés).
-- **PHP 8+** et **MySQL**.
-- Un navigateur web moderne.
+## ⚙️ 4. Technologies utilisées
 
-### Étapes d'Installation
+* 🐘 PHP (Architecture MVC)
+* 🗄️ MySQL
+* 🎨 Bootstrap 5
+* 🌐 HTML / CSS / JavaScript
 
-1. **Cloner le dépôt** :
-   ```bash
-   git clone https://github.com/marwa02-07/cabinet-dentaire.git
-   cd cabinet-dentaire
-   ```
+---
 
-2. **Placer le projet dans XAMPP** :
-   - Copiez le dossier `cabinet-dentaire` dans `C:/xampp/htdocs/` (ou votre répertoire htdocs équivalent).
+## 🚀 5. Fonctionnalités principales
 
-3. **Configurer la base de données** :
-   - Ouvrez **phpMyAdmin** via `http://localhost/phpmyadmin`.
-   - Créez une nouvelle base de données nommée `cabinet_dentaire`.
-   - Importez le fichier SQL fourni : `cabinet_dentaire.sql` (situé à la racine du projet).
+* 🔐 Authentification sécurisée (login/logout)
+* 👥 Gestion des utilisateurs (admin)
+* 📅 Prise et gestion des rendez-vous
+* ❌ Prévention des conflits (double réservation)
+* 🦷 Gestion des consultations :
 
-4. **Configurer la connexion à la base de données** :
-   - Ouvrez le fichier `config.php` à la racine du projet.
-   - Modifiez les paramètres de connexion si nécessaire :
-     ```php
-     define('DB_HOST', 'localhost');
-     define('DB_NAME', 'cabinet_dentaire');
-     define('DB_USER', 'root');
-     define('DB_PASS', '');
-     ```
+  * Diagnostic
+  * Traitement
+  * Notes médicales
+* 📊 Dashboards personnalisés par rôle
+* 🎨 Interface moderne et responsive
 
-5. **Démarrer les services** :
-   - Lancez Apache et MySQL dans le panneau de contrôle XAMPP.
+---
 
-6. **Accéder à l'application** :
-   - Ouvrez votre navigateur et allez à : `http://localhost/cabinet-dentaire/`
-   - La page d'accueil s'affichera automatiquement.
-
-## 👤 Comptes de Test
-
-Utilisez ces comptes pour explorer les différentes fonctionnalités :
-
-| Rôle       | Email                  | Mot de passe |
-|------------|------------------------|--------------|
-| Administrateur | admin@cabinet.com     | 123456      |
-| Médecin/Dentiste | dentiste@cabinet.com | 123456      |
-| Secrétaire | secretaire@cabinet.com | 123456      |
-| Patient    | patient@cabinet.com    | 123456      |
-
-## 📁 Structure du Projet
+## 📁 6. Structure du projet
 
 ```
 cabinet-dentaire/
@@ -103,38 +100,105 @@ cabinet-dentaire/
 └── README.md            # Ce fichier
 ```
 
-## 🔧 Dépannage
+---
 
-- **Erreur 404** : Assurez-vous que l'URL est correcte (`http://localhost/cabinet-dentaire/`) et que le dossier est bien dans `htdocs`.
-- **Problème de base de données** : Vérifiez les paramètres dans `config.php` et que MySQL est démarré.
-- **Permissions** : Assurez-vous que PHP peut écrire dans les dossiers nécessaires (sessions, etc.).
+## 🛠️ 7. Installation en local (XAMPP)
 
-## 🤝 Contribution
+### Étapes :
 
-Les contributions sont les bienvenues ! Pour contribuer :
-1. Forkez le projet.
-2. Créez une branche pour votre fonctionnalité (`git checkout -b feature/nouvelle-fonction`).
-3. Commitez vos changements (`git commit -am 'Ajout de nouvelle fonctionnalité'`).
-4. Poussez vers la branche (`git push origin feature/nouvelle-fonction`).
-5. Ouvrez une Pull Request.
+1. Cloner le projet :
 
-## 📄 Licence
+```
+git clone https://github.com/Afousswassim/cabinet-dentaire.git
+```
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+2. Placer le projet dans :
+
+```
+htdocs/
+```
+
+3. Créer une base de données (ex: `cabinet_dentaire`)
+
+4. Importer le fichier `.sql`
+
+5. Configurer la connexion dans :
+
+```
+app/core/Database.php
+```
+
+6. Démarrer :
+
+* Apache
+* MySQL
+
+7. Accéder au projet :
+
+```
+http://localhost/cabinet-dentaire-IL/index.php?route=/login
+
+```
 
 ---
 
-Développé avec ❤️ pour simplifier la gestion des cabinets dentaires.
+## 🌍 8. Accès sans installation
 
-## 🔐 Sécurité
-
-- Mots de passe hashés avec `password_hash()` (bcrypt)
-- Sessions PHP sécurisées par rôle (`SESS_ADMIN`, `SESS_MEDECIN`, etc.)
-- Contrôle d'accès par rôle sur chaque route
-- Protection contre les injections SQL via PDO et requêtes préparées
+👉 Accès direct en ligne :
+https://cabinet-dentaire.infinityfree.me/
 
 ---
 
-## 📄 Licence
+## 🔒 9. Sécurité
 
-Projet académique - Usage éducatif.
+* Sessions PHP
+* Hashage des mots de passe (`password_hash`)
+* Vérification (`password_verify`)
+* Contrôle d’accès par rôle
+* Protection des routes
+
+---
+
+## ⚠️ 10. Remarques importantes
+
+* Les mots de passe sont fournis pour test uniquement
+* L’application est optimisée pour un usage académique
+* Certaines fonctionnalités avancées peuvent être améliorées
+
+---
+
+## 🎯 11. Objectif du projet
+
+Ce projet vise à :
+
+✔ Digitaliser la gestion d’un cabinet dentaire
+✔ Améliorer l’organisation des rendez-vous et consultations
+✔ Mettre en pratique l’architecture MVC
+✔ Créer une interface moderne et intuitive
+
+---
+
+## 👨‍💻 12. Auteur
+
+* Afouss Wassim
+* Benziane Marwa
+* Ennaimai Aya 
+* Projet académique – Filière Informatique
+
+---
+
+## 🚀 13. Améliorations futures
+
+* 📩 Notifications email
+* 💳 Module de facturation
+* 📈 Statistiques avancées
+* 📎 Upload de documents médicaux
+* 🔐 Sécurité avancée (2FA)
+
+---
+
+# ✅ Conclusion
+
+Cette application représente une solution moderne et efficace pour la gestion d’un cabinet dentaire, combinant une architecture propre, une interface utilisateur intuitive et des fonctionnalités adaptées aux besoins réels.
+
+---
